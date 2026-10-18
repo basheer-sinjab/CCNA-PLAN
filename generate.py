@@ -1,0 +1,1193 @@
+import json, os
+
+json_path = os.path.join(os.path.dirname(__file__), 'plan_data.json')
+with open(json_path, 'r', encoding='utf-8') as f:
+    items = json.load(f)
+
+json_data_str = json.dumps(items, ensure_ascii=False)
+
+html_template = """<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خطة دراسة وتتبع Cisco CCNA 200-301 v1.1 | 2026</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            cisco: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .font-num {
+      font-family: 'Inter', sans-serif;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.4);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(56, 189, 248, 0.7);
+    }
+    .video-card-transition {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-enter {
+      animation: modalFadeIn 0.2s ease-out forwards;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-cisco-500 selection:text-white">
+
+  <!-- Main Shell -->
+  <div id="app" class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-6 sm:space-y-8">
+
+    <!-- Header Banner -->
+    <header class="flex flex-col md:flex-row items-center justify-between gap-5 p-5 sm:p-6 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl backdrop-blur-xl">
+      <div class="flex items-center gap-4 text-right">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-cisco-600 via-cisco-500 to-emerald-400 flex items-center justify-center text-white shadow-xl shadow-cisco-600/30 text-2xl sm:text-3xl font-black shrink-0">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-cisco-500/20 text-cisco-300 border border-cisco-500/30 font-num">Cisco CCNA 200-301 v1.1</span>
+            <span class="px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">خطة 2026 التفاعلية</span>
+          </div>
+          <h1 class="text-xl sm:text-3xl font-black text-white mt-1">لوحة متابعة وإنجاز كورس سيسكو CCNA</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">25 يوماً تدريبياً • 221 مقطعاً • ~33.5 ساعة • حفظ تلقائي في المتصفح</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 w-full md:w-auto">
+        <!-- Jump to next pending -->
+        <button id="jumpNextBtn" onclick="jumpToNextPending()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cisco-600 hover:bg-cisco-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-cisco-600/30 transition active:scale-95">
+          <i class="fa-solid fa-bolt text-yellow-300"></i>
+          <span>الدرس التالي المطلوب</span>
+        </button>
+
+        <!-- Export CSV Button -->
+        <button onclick="exportUpdatedCSV()" title="تصدير ملف CSV محدث بحالة الإنجاز الحالية" class="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 text-xs sm:text-sm font-semibold transition active:scale-95">
+          <i class="fa-solid fa-file-csv text-base"></i>
+          <span>تصدير CSV محدث</span>
+        </button>
+
+        <!-- Backup & Restore -->
+        <button onclick="openBackupModal()" title="نسخ احتياطي أو استعادة" class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-medium transition active:scale-95">
+          <i class="fa-solid fa-cloud-arrow-down text-cisco-400"></i>
+          <span class="hidden sm:inline">نسخ / استعادة</span>
+        </button>
+
+        <!-- Reset Progress -->
+        <button onclick="confirmReset()" title="إعادة تعيين التقدم بالكامل" class="p-2.5 rounded-xl bg-slate-800 hover:bg-rose-950/70 hover:text-rose-400 text-slate-400 border border-slate-700 transition active:scale-95">
+          <i class="fa-solid fa-arrow-rotate-right"></i>
+        </button>
+
+        <!-- Dark/Light Theme Toggle -->
+        <button onclick="toggleTheme()" id="themeBtn" title="تبديل الوضع الليلي / الفاتح" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition active:scale-95">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Metrics Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- Card 1: Total Completion % -->
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">نسبة الإنجاز الإجمالية</span>
+          <span id="badgeMotivational" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cisco-500/20 text-cisco-400 border border-cisco-500/30">ابدأ الآن 🚀</span>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-2">
+            <span id="statPercent" class="text-4xl sm:text-5xl font-black text-white font-num tracking-tight">0%</span>
+            <span class="text-xs text-slate-400 font-num">من محتوى الكورس</span>
+          </div>
+          <div class="w-full h-3 bg-slate-800 rounded-full mt-3 overflow-hidden p-0.5 border border-slate-700/60">
+            <div id="statProgressBar" class="h-full bg-gradient-to-r from-cisco-500 via-teal-400 to-emerald-400 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Completed Videos -->
+      <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">المقاطع المنجزة</span>
+          <div class="flex items-baseline gap-1.5 font-num">
+            <span id="statCompletedCount" class="text-3xl sm:text-4xl font-black text-emerald-400">0</span>
+            <span class="text-slate-500 text-lg">/</span>
+            <span id="statTotalCount" class="text-slate-400 font-bold text-lg">221</span>
+          </div>
+          <span id="statPendingCount" class="text-xs text-amber-400/90 font-medium mt-1.5 block">المتبقي: 221 مقطع</span>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+      </div>
+
+      <!-- Card 3: Hours Completed vs Remaining -->
+      <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">الوقت المشاهد</span>
+          <div class="flex items-baseline gap-1.5 font-num">
+            <span id="statCompletedHours" class="text-3xl sm:text-4xl font-black text-cisco-400">0.0</span>
+            <span class="text-slate-500 text-xs">من</span>
+            <span id="statTotalHours" class="text-slate-400 font-bold text-sm">33.5 ساعة</span>
+          </div>
+          <span id="statRemainingHours" class="text-xs text-slate-400 mt-1.5 block font-num">المتبقي: ~33.5 ساعة</span>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-cisco-500/10 border border-cisco-500/25 flex items-center justify-center text-cisco-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+      </div>
+
+      <!-- Card 4: Days Finished -->
+      <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">الأيام المكتملة</span>
+          <div class="flex items-baseline gap-1.5 font-num">
+            <span id="statCompletedDays" class="text-3xl sm:text-4xl font-black text-purple-400">0</span>
+            <span class="text-slate-500 text-lg">/</span>
+            <span class="text-slate-400 font-bold text-lg">25</span>
+          </div>
+          <span id="statDaysRemaining" class="text-xs text-slate-400 mt-1.5 block font-num">متبقي 25 يوماً تدريبياً</span>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/25 flex items-center justify-center text-purple-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Celebration Banner -->
+    <div id="congratsBanner" class="hidden p-6 rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cisco-600 text-white shadow-2xl relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4 text-center sm:text-right">
+          <div class="text-5xl">🏆🎓</div>
+          <div>
+            <h2 class="text-2xl font-black">ألف مبروك! أتممت خطة كورس CCNA 200-301 بالكامل!</h2>
+            <p class="text-sm text-emerald-100 mt-1">أنت الآن جاهز للاختبار الدولي وحصد الشهادة بجدارة. بالتوفيق الدائم!</p>
+          </div>
+        </div>
+        <button onclick="triggerConfetti(true)" class="px-5 py-2.5 rounded-xl bg-white text-slate-900 font-bold text-sm shadow hover:bg-emerald-50 transition active:scale-95 flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-champagne-glasses text-emerald-600"></i>
+          <span>إطلاق الاحتفال مجدداً</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Controls, Filter & Search Panel -->
+    <div class="p-5 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
+      
+      <!-- Top Row: Search + Status Tabs + Expand/Collapse -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        
+        <!-- Search Field -->
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            oninput="handleSearch(this.value)" 
+            placeholder="ابحث في عناوين المقاطع، رقم اليوم، المفاهيم (IPv6, Subnetting, OSPF, VLANs, Cabling)..." 
+            class="w-full pr-11 pl-10 py-3 rounded-2xl bg-slate-950/70 border border-slate-700/80 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cisco-500 focus:ring-1 focus:ring-cisco-500 transition"
+          >
+          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Status Filter Tabs -->
+        <div class="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs sm:text-sm font-bold self-start lg:self-center">
+          <button onclick="setStatusFilter('all')" id="filterAll" class="filter-tab px-3.5 py-2 rounded-xl bg-cisco-600 text-white transition">الكل (<span id="countAllTab" class="font-num">221</span>)</button>
+          <button onclick="setStatusFilter('pending')" id="filterPending" class="filter-tab px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition">⏳ قيد الانتظار (<span id="countPendingTab" class="font-num">221</span>)</button>
+          <button onclick="setStatusFilter('completed')" id="filterCompleted" class="filter-tab px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition">✅ المكتملة (<span id="countCompletedTab" class="font-num">0</span>)</button>
+        </div>
+
+        <!-- Accordions Toggle -->
+        <div class="flex items-center gap-2 self-end lg:self-center">
+          <button onclick="toggleAllAccordions(true)" title="توسيع كافة الأيام" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-chevron-down"></i>
+            <span>فتح الكل</span>
+          </button>
+          <button onclick="toggleAllAccordions(false)" title="طي كافة الأيام" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-chevron-up"></i>
+            <span>طي الكل</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Days Carousel Pills -->
+      <div class="border-t border-slate-800 pt-3">
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+          <span class="flex items-center gap-1.5 font-bold">
+            <i class="fa-solid fa-calendar-days text-cisco-400"></i>
+            <span>الانتقال والتصفية حسب اليوم (25 يوماً):</span>
+          </span>
+          <span class="text-[11px] text-slate-500 hidden sm:inline">انقر على اليوم للتصفية المباشرة أو عرض الكل</span>
+        </div>
+        <div id="dayPillsContainer" class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Active Filter Notification -->
+    <div id="activeFilterAlert" class="hidden flex items-center justify-between px-5 py-3 rounded-2xl bg-cisco-900/40 border border-cisco-600/50 text-cisco-200 text-xs sm:text-sm">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-filter text-cisco-400"></i>
+        <span id="activeFilterText">تصفية مفعّلة</span>
+      </div>
+      <button onclick="resetFilters()" class="text-xs text-cisco-300 hover:underline font-bold">إلغاء التصفية وعرض الكل</button>
+    </div>
+
+    <!-- Main Content Container: Grouped Days & Videos -->
+    <main id="videosContainer" class="space-y-6">
+      <!-- Injected by JavaScript -->
+    </main>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-16 px-4 bg-slate-900/40 rounded-3xl border border-slate-800">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 text-2xl">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-200">لم يتم العثور على مقاطع مطابقة لبحثك</h3>
+      <p class="text-sm text-slate-400 mt-1">جرّب البحث بكلمة أخرى أو قم بإلغاء الفلاتر المحددة</p>
+      <button onclick="resetFilters()" class="mt-4 px-5 py-2.5 rounded-xl bg-cisco-600 text-white text-xs font-bold hover:bg-cisco-500 transition">
+        إعادة تعيين الفلاتر
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pt-8 pb-12 text-center text-xs text-slate-500 border-t border-slate-800/80 space-y-2">
+      <div class="flex items-center justify-center gap-2">
+        <span>خطة دراسة وتتبع Cisco CCNA 200-301 (v1.1)</span>
+        <span>•</span>
+        <span>حفظ تلقائي لتقدمك وملاحظاتك في المتصفح</span>
+      </div>
+      <p>يمكنك في أي وقت تصدير ملف CSV محدث بالدروس المنجزة أو أخذ نسخة احتياطية</p>
+    </footer>
+
+  </div>
+
+  <!-- Video Modal (YouTube Embedded Player) -->
+  <div id="videoModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-4xl overflow-hidden shadow-2xl modal-enter flex flex-col">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-4 sm:p-5 border-b border-slate-800 bg-slate-950/60">
+        <div class="flex items-center gap-3 overflow-hidden">
+          <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-500 flex items-center justify-center shrink-0">
+            <i class="fa-brands fa-youtube text-xl"></i>
+          </div>
+          <div class="truncate">
+            <h3 id="modalVideoTitle" class="text-sm sm:text-base font-bold text-white truncate">عنوان الفيديو</h3>
+            <span id="modalVideoMeta" class="text-xs text-slate-400 font-num">Day 1 • Oct 18, 2026 • 14m</span>
+          </div>
+        </div>
+        <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Iframe Video -->
+      <div class="relative w-full aspect-video bg-black">
+        <iframe 
+          id="videoIframe" 
+          class="w-full h-full" 
+          src="" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="flex flex-wrap items-center justify-between gap-3 p-4 border-t border-slate-800 bg-slate-950/50">
+        <!-- Complete toggle inside modal -->
+        <button id="modalToggleCompleteBtn" onclick="toggleCurrentModalVideo()" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition active:scale-95">
+          <i class="fa-solid fa-check"></i>
+          <span>تحديد كمكتمل</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button id="modalPrevBtn" onclick="navigateModalVideo(-1)" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>السابق</span>
+          </button>
+          <button id="modalNextBtn" onclick="navigateModalVideo(1)" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition flex items-center gap-1.5">
+            <span>التالي</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cisco-400 text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>يوتيوب</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes Modal -->
+  <div id="notesModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl modal-enter">
+      <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+        <div class="flex items-center gap-2 text-white font-bold text-sm sm:text-base">
+          <i class="fa-solid fa-pen-to-square text-cisco-400"></i>
+          <span>ملاحظات الدرس الشخصية</span>
+        </div>
+        <button onclick="closeNotesModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl hover:bg-slate-800">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 space-y-3">
+        <div class="text-xs text-slate-300 font-semibold" id="notesVideoTitle">عنوان الدرس</div>
+        <textarea 
+          id="noteTextArea" 
+          rows="6" 
+          placeholder="سجّل هنا أهم الأوامر (مثل: show ip route, switchport mode trunk) أو القوانين والمعادلات التي تحتاج مراجعتها..." 
+          class="w-full p-3.5 rounded-2xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cisco-500 focus:ring-1 focus:ring-cisco-500"
+        ></textarea>
+        <div class="text-[11px] text-slate-400">يتم حفظ الملاحظات محلياً في متصفحك وتبقى حتى بعد إغلاق الصفحة.</div>
+      </div>
+      <div class="p-4 border-t border-slate-800 flex justify-end gap-2 bg-slate-950/50">
+        <button onclick="closeNotesModal()" class="px-4 py-2 rounded-xl text-slate-400 hover:text-white text-xs font-semibold">إلغاء</button>
+        <button onclick="saveNote()" class="px-5 py-2 rounded-xl bg-cisco-600 hover:bg-cisco-500 text-white text-xs font-bold shadow">حفظ الملاحظة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backup & Restore Modal -->
+  <div id="backupModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl modal-enter">
+      <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+        <div class="flex items-center gap-2 text-white font-bold text-sm sm:text-base">
+          <i class="fa-solid fa-database text-cisco-400"></i>
+          <span>النسخ الاحتياطي والاستعادة</span>
+        </div>
+        <button onclick="closeBackupModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl hover:bg-slate-800">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 space-y-5">
+        <div>
+          <h4 class="text-xs font-bold text-slate-300 uppercase mb-1">تصدير نسخة احتياطية (JSON)</h4>
+          <p class="text-xs text-slate-400 mb-2.5">تحميل ملف JSON يشمل كافة المقاطع التي قمت بإنجازها مع ملاحظاتك الخاصة.</p>
+          <button onclick="downloadBackupJSON()" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-cisco-400 border border-slate-700 text-xs font-bold flex items-center justify-center gap-2 transition">
+            <i class="fa-solid fa-download"></i>
+            <span>تحميل ملف النسخة الاحتياطية</span>
+          </button>
+        </div>
+
+        <div class="border-t border-slate-800 pt-4">
+          <h4 class="text-xs font-bold text-slate-300 uppercase mb-1">استعادة نسخة سابقة</h4>
+          <p class="text-xs text-slate-400 mb-2.5">اختر ملف JSON محفوظ سابقاً لاستعادة تقدمك فوراً.</p>
+          <input type="file" id="restoreFileInput" accept=".json" class="hidden" onchange="handleRestoreFile(event)">
+          <button onclick="document.getElementById('restoreFileInput').click()" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 text-xs font-bold flex items-center justify-center gap-2 transition">
+            <i class="fa-solid fa-upload"></i>
+            <span>اختيار ملف JSON للاستعادة</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logic & Data Script -->
+  <script>
+    const RAW_VIDEOS = """ + json_data_str + """;
+
+    let completedSet = new Set();
+    let notesMap = {};
+    let collapsedDays = new Set();
+    let currentFilter = 'all'; // 'all', 'pending', 'completed'
+    let selectedDayFilter = null;
+    let searchQuery = '';
+    let activeModalVideoId = null;
+
+    const STORAGE_KEY_COMPLETED = 'ccna_2026_completed_ids_v1';
+    const STORAGE_KEY_NOTES = 'ccna_2026_notes_v1';
+    const STORAGE_KEY_THEME = 'ccna_2026_theme_v1';
+
+    function initApp() {
+      loadState();
+      applyTheme();
+      renderDayPills();
+      render();
+      updateStats();
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_COMPLETED);
+        if (saved) {
+          completedSet = new Set(JSON.parse(saved));
+        }
+        const savedNotes = localStorage.getItem(STORAGE_KEY_NOTES);
+        if (savedNotes) {
+          notesMap = JSON.parse(savedNotes);
+        }
+      } catch (e) {
+        console.error('Error loading state:', e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY_COMPLETED, JSON.stringify(Array.from(completedSet)));
+        localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(notesMap));
+      } catch (e) {
+        console.error('Error saving state:', e);
+      }
+    }
+
+    function toggleVideo(id, event) {
+      if (event) event.stopPropagation();
+      const wasCompleted = completedSet.has(id);
+      
+      if (wasCompleted) {
+        completedSet.delete(id);
+      } else {
+        completedSet.add(id);
+      }
+      
+      saveState();
+      updateStats();
+      render();
+
+      const video = RAW_VIDEOS.find(v => v.id === id);
+      if (!wasCompleted && video) {
+        checkDayCompletion(video.day);
+      }
+    }
+
+    function checkDayCompletion(dayName) {
+      const dayVideos = RAW_VIDEOS.filter(v => v.day === dayName);
+      const allDone = dayVideos.every(v => completedSet.has(v.id));
+      if (allDone && dayVideos.length > 0) {
+        triggerConfetti(false);
+      }
+      if (completedSet.size === RAW_VIDEOS.length) {
+        triggerConfetti(true);
+      }
+    }
+
+    function toggleDayAll(dayName, event) {
+      if (event) event.stopPropagation();
+      const dayVideos = RAW_VIDEOS.filter(v => v.day === dayName);
+      const allDone = dayVideos.every(v => completedSet.has(v.id));
+
+      if (allDone) {
+        dayVideos.forEach(v => completedSet.delete(v.id));
+      } else {
+        dayVideos.forEach(v => completedSet.add(v.id));
+        triggerConfetti(false);
+      }
+
+      saveState();
+      updateStats();
+      render();
+    }
+
+    function triggerConfetti(massive = false) {
+      if (typeof confetti === 'function') {
+        if (massive) {
+          const end = Date.now() + 3 * 1000;
+          const colors = ['#0ea5e9', '#10b981', '#f59e0b', '#8b5cf6'];
+          (function frame() {
+            confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+            confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+            if (Date.now() < end) requestAnimationFrame(frame);
+          }());
+        } else {
+          confetti({ particleCount: 80, spread: 70, origin: { y: 0.7 } });
+        }
+      }
+    }
+
+    function renderDayPills() {
+      const container = document.getElementById('dayPillsContainer');
+      const uniqueDays = [];
+      const seen = new Set();
+      RAW_VIDEOS.forEach(v => {
+        if (!seen.has(v.day)) {
+          seen.add(v.day);
+          uniqueDays.push(v.day);
+        }
+      });
+
+      let html = `
+        <button onclick="filterByDay(null)" class="day-pill px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition ${selectedDayFilter === null ? 'bg-cisco-600 text-white shadow' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}">
+          جميع الأيام
+        </button>
+      `;
+
+      uniqueDays.forEach(day => {
+        const dayVideos = RAW_VIDEOS.filter(v => v.day === day);
+        const dayDone = dayVideos.filter(v => completedSet.has(v.id)).length;
+        const isComplete = dayDone === dayVideos.length && dayVideos.length > 0;
+        const isSelected = selectedDayFilter === day;
+
+        let badgeClass = 'bg-slate-800 text-slate-300 hover:bg-slate-700';
+        if (isSelected) {
+          badgeClass = 'bg-cisco-600 text-white shadow ring-2 ring-cisco-400';
+        } else if (isComplete) {
+          badgeClass = 'bg-emerald-950/80 border border-emerald-600/50 text-emerald-400';
+        }
+
+        html += `
+          <button onclick="filterByDay('${day}')" class="day-pill px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition flex items-center gap-1.5 ${badgeClass}">
+            <span class="font-num">${day}</span>
+            ${isComplete ? '<i class="fa-solid fa-check text-[10px]"></i>' : `<span class="text-[10px] opacity-75 font-num">${dayDone}/${dayVideos.length}</span>`}
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function filterByDay(day) {
+      selectedDayFilter = day;
+      renderDayPills();
+      updateFilterAlert();
+      render();
+      if (day) {
+        const el = document.getElementById(`day-section-${day.replace(/\\s+/g, '-')}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function setStatusFilter(status) {
+      currentFilter = status;
+      document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.classList.remove('bg-cisco-600', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+      const activeBtn = document.getElementById(`filter${status.charAt(0).toUpperCase() + status.slice(1)}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-cisco-600', 'text-white');
+        activeBtn.classList.remove('text-slate-400');
+      }
+      updateFilterAlert();
+      render();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (searchQuery) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      updateFilterAlert();
+      render();
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchQuery = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      updateFilterAlert();
+      render();
+    }
+
+    function resetFilters() {
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      currentFilter = 'all';
+      selectedDayFilter = null;
+      setStatusFilter('all');
+      renderDayPills();
+      updateFilterAlert();
+      render();
+    }
+
+    function updateFilterAlert() {
+      const alert = document.getElementById('activeFilterAlert');
+      const text = document.getElementById('activeFilterText');
+      const isFiltered = searchQuery !== '' || currentFilter !== 'all' || selectedDayFilter !== null;
+      if (isFiltered) {
+        alert.classList.remove('hidden');
+        let parts = [];
+        if (searchQuery) parts.push(`بحث: "${searchQuery}"`);
+        if (currentFilter === 'pending') parts.push('الحالة: قيد الانتظار');
+        if (currentFilter === 'completed') parts.push('الحالة: المكتملة');
+        if (selectedDayFilter) parts.push(`اليوم: ${selectedDayFilter}`);
+        text.textContent = 'تصفية نشطة: ' + parts.join(' • ');
+      } else {
+        alert.classList.add('hidden');
+      }
+    }
+
+    function toggleDayAccordion(dayName) {
+      if (collapsedDays.has(dayName)) {
+        collapsedDays.delete(dayName);
+      } else {
+        collapsedDays.add(dayName);
+      }
+      render();
+    }
+
+    function toggleAllAccordions(expand) {
+      if (expand) {
+        collapsedDays.clear();
+      } else {
+        RAW_VIDEOS.forEach(v => collapsedDays.add(v.day));
+      }
+      render();
+    }
+
+    function jumpToNextPending() {
+      const nextPending = RAW_VIDEOS.find(v => !completedSet.has(v.id));
+      if (!nextPending) {
+        alert('تهانينا! لقد أتممت جميع الدروس بنجاح.');
+        return;
+      }
+      if (currentFilter === 'completed') setStatusFilter('all');
+      if (selectedDayFilter && selectedDayFilter !== nextPending.day) {
+        selectedDayFilter = null;
+        renderDayPills();
+      }
+      collapsedDays.delete(nextPending.day);
+      render();
+
+      setTimeout(() => {
+        const row = document.getElementById(`video-row-${nextPending.id}`);
+        if (row) {
+          row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          row.classList.add('ring-4', 'ring-cisco-400', 'bg-cisco-900/40');
+          setTimeout(() => {
+            row.classList.remove('ring-4', 'ring-cisco-400', 'bg-cisco-900/40');
+          }, 2500);
+        }
+      }, 100);
+    }
+
+    function updateStats() {
+      const total = RAW_VIDEOS.length;
+      const completed = completedSet.size;
+      const pending = total - completed;
+      const pct = Math.round((completed / total) * 100);
+
+      let completedMins = 0;
+      RAW_VIDEOS.forEach(v => {
+        if (completedSet.has(v.id)) completedMins += v.durationMins;
+      });
+      const totalMins = 2011;
+      const remainingMins = totalMins - completedMins;
+
+      const daysMap = {};
+      RAW_VIDEOS.forEach(v => {
+        if (!daysMap[v.day]) daysMap[v.day] = { total: 0, done: 0 };
+        daysMap[v.day].total++;
+        if (completedSet.has(v.id)) daysMap[v.day].done++;
+      });
+
+      let completedDaysCount = 0;
+      for (const d in daysMap) {
+        if (daysMap[d].total > 0 && daysMap[d].done === daysMap[d].total) {
+          completedDaysCount++;
+        }
+      }
+
+      document.getElementById('statPercent').textContent = `${pct}%`;
+      document.getElementById('statProgressBar').style.width = `${pct}%`;
+      document.getElementById('statCompletedCount').textContent = completed;
+      document.getElementById('statPendingCount').textContent = `المتبقي: ${pending} مقطع`;
+      
+      document.getElementById('statCompletedHours').textContent = (completedMins / 60).toFixed(1);
+      document.getElementById('statRemainingHours').textContent = `المتبقي: ~${(remainingMins / 60).toFixed(1)} ساعة`;
+
+      document.getElementById('statCompletedDays').textContent = completedDaysCount;
+      document.getElementById('statDaysRemaining').textContent = `متبقي ${25 - completedDaysCount} يوماً تدريبياً`;
+
+      document.getElementById('countAllTab').textContent = total;
+      document.getElementById('countPendingTab').textContent = pending;
+      document.getElementById('countCompletedTab').textContent = completed;
+
+      const badge = document.getElementById('badgeMotivational');
+      if (pct === 0) badge.textContent = 'ابدأ الآن 🚀';
+      else if (pct <= 25) badge.textContent = 'بداية قوية 💪';
+      else if (pct <= 50) badge.textContent = 'تقدم رائع 🎯';
+      else if (pct <= 75) badge.textContent = 'أكثر من النصف 🌟';
+      else if (pct < 100) badge.textContent = 'اللمسات الأخيرة 🏆';
+      else badge.textContent = 'تم الإنجاز بالكامل! 🎓';
+
+      const banner = document.getElementById('congratsBanner');
+      if (pct === 100) {
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      renderDayPills();
+    }
+
+    function render() {
+      const container = document.getElementById('videosContainer');
+      const emptyState = document.getElementById('emptyState');
+
+      let filtered = RAW_VIDEOS.filter(v => {
+        const isDone = completedSet.has(v.id);
+        if (currentFilter === 'pending' && isDone) return false;
+        if (currentFilter === 'completed' && !isDone) return false;
+
+        if (selectedDayFilter && v.day !== selectedDayFilter) return false;
+
+        if (searchQuery) {
+          const matchTitle = v.title.toLowerCase().includes(searchQuery);
+          const matchDay = v.day.toLowerCase().includes(searchQuery);
+          const matchDate = v.date.toLowerCase().includes(searchQuery);
+          if (!matchTitle && !matchDay && !matchDate) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      const groups = {};
+      filtered.forEach(v => {
+        if (!groups[v.day]) {
+          groups[v.day] = {
+            dayName: v.day,
+            date: v.date,
+            videos: []
+          };
+        }
+        groups[v.day].videos.push(v);
+      });
+
+      let html = '';
+
+      for (const dayName in groups) {
+        const group = groups[dayName];
+        const allDayVideos = RAW_VIDEOS.filter(v => v.day === dayName);
+        const dayDoneCount = allDayVideos.filter(v => completedSet.has(v.id)).length;
+        const dayTotalCount = allDayVideos.length;
+        const dayPct = Math.round((dayDoneCount / dayTotalCount) * 100);
+        const isDayAllDone = dayDoneCount === dayTotalCount && dayTotalCount > 0;
+        const isCollapsed = collapsedDays.has(dayName) && !searchQuery;
+        const dayTotalMins = allDayVideos.reduce((acc, curr) => acc + curr.durationMins, 0);
+
+        html += `
+          <div id="day-section-${dayName.replace(/\\s+/g, '-')}" class="rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl overflow-hidden transition">
+            
+            <div onclick="toggleDayAccordion('${dayName}')" class="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer hover:bg-slate-800/40 select-none border-b border-slate-800/60">
+              
+              <div class="flex items-center gap-3">
+                <button class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+                  <i class="fa-solid fa-chevron-${isCollapsed ? 'down' : 'up'} text-xs"></i>
+                </button>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-lg sm:text-xl font-bold text-white font-num">${dayName}</h3>
+                    <span class="text-xs text-slate-400 font-num bg-slate-800 px-2.5 py-0.5 rounded-full border border-slate-700/60">${group.date}</span>
+                    ${isDayAllDone ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">مكتمل بالكامل 🎉</span>' : ''}
+                  </div>
+                  <div class="text-xs text-slate-400 mt-0.5 flex items-center gap-2 font-num">
+                    <span>${dayTotalCount} مقاطع تدريبية</span>
+                    <span>•</span>
+                    <span>⏱️ ${dayTotalMins} دقيقة</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 self-stretch md:self-auto justify-between md:justify-end" onclick="event.stopPropagation()">
+                <div class="flex items-center gap-2">
+                  <div class="w-24 sm:w-32 h-2.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50">
+                    <div class="h-full bg-gradient-to-r from-cisco-500 to-emerald-400 transition-all duration-300" style="width: ${dayPct}%"></div>
+                  </div>
+                  <span class="text-xs font-semibold text-slate-300 font-num min-w-[50px]">${dayDoneCount}/${dayTotalCount} (${dayPct}%)</span>
+                </div>
+
+                <button 
+                  onclick="toggleDayAll('${dayName}', event)" 
+                  class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${isDayAllDone ? 'bg-emerald-600 text-white hover:bg-emerald-500' : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'}"
+                >
+                  <i class="fa-solid fa-${isDayAllDone ? 'check-double' : 'check'}"></i>
+                  <span>${isDayAllDone ? 'إلغاء تحديد اليوم' : 'تحديد اليوم كاملاً'}</span>
+                </button>
+              </div>
+
+            </div>
+
+            <div class="${isCollapsed ? 'hidden' : 'block'} divide-y divide-slate-800/50">
+        `;
+
+        group.videos.forEach(video => {
+          const isDone = completedSet.has(video.id);
+          const hasNote = notesMap[video.id] && notesMap[video.id].trim().length > 0;
+
+          html += `
+            <div 
+              id="video-row-${video.id}" 
+              class="p-4 sm:px-5 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 video-card-transition ${isDone ? 'bg-slate-950/40 text-slate-400' : 'hover:bg-slate-800/30'}"
+            >
+              
+              <div class="flex items-start sm:items-center gap-3.5 flex-1 min-w-0">
+                
+                <button 
+                  type="button"
+                  onclick="toggleVideo(${video.id}, event)"
+                  title="${isDone ? 'اضغط لتغيير الحالة إلى قيد الانتظار' : 'اضغط لتحديد الدرس كمكتمل'}"
+                  class="w-7 h-7 mt-0.5 sm:mt-0 rounded-lg flex items-center justify-center shrink-0 border-2 transition active:scale-90 ${isDone ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'bg-slate-950 border-slate-700 hover:border-cisco-400 text-transparent'}"
+                >
+                  <i class="fa-solid fa-check text-xs font-black"></i>
+                </button>
+
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 font-num shrink-0">#${video.id}</span>
+
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm font-semibold text-slate-100 flex items-center flex-wrap gap-1.5 ${isDone ? 'line-through text-slate-500' : ''}">
+                    <span>${escapeHtml(video.title)}</span>
+                  </div>
+                  
+                  <div class="flex items-center gap-3 text-xs text-slate-400 mt-1">
+                    <span class="flex items-center gap-1 font-num text-slate-400">
+                      <i class="fa-regular fa-clock text-[11px] text-cisco-400"></i>
+                      <span>${video.duration}</span>
+                    </span>
+                    
+                    ${isDone ? `
+                      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-num">
+                        [✓] Completed • مكتمل
+                      </span>
+                    ` : `
+                      <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-400/90 border border-amber-500/20 font-num">
+                        [ ] Pending • قيد الانتظار
+                      </span>
+                    `}
+
+                    ${hasNote ? `
+                      <span class="text-xs text-cisco-400 flex items-center gap-1" title="يوجد ملاحظة مسجلة">
+                        <i class="fa-solid fa-note-sticky text-yellow-400"></i>
+                        <span>ملاحظة</span>
+                      </span>
+                    ` : ''}
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                
+                <button 
+                  onclick="openVideoModal(${video.id})"
+                  title="مشاهدة الفيديو داخل الصفحة"
+                  class="px-3.5 py-1.5 rounded-xl bg-cisco-600/20 hover:bg-cisco-600 text-cisco-300 hover:text-white border border-cisco-500/30 text-xs font-bold flex items-center gap-1.5 transition active:scale-95"
+                >
+                  <i class="fa-solid fa-play text-[11px]"></i>
+                  <span>مشاهدة</span>
+                </button>
+
+                <a 
+                  href="${video.url}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  title="فتح في يوتيوب"
+                  class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-red-400 text-xs transition active:scale-95"
+                >
+                  <i class="fa-brands fa-youtube text-sm"></i>
+                </a>
+
+                <button 
+                  onclick="openNotesModal(${video.id})"
+                  title="ملاحظات الدرس"
+                  class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-400 text-xs transition active:scale-95"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+
+              </div>
+
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function openVideoModal(id) {
+      activeModalVideoId = id;
+      const video = RAW_VIDEOS.find(v => v.id === id);
+      if (!video) return;
+
+      document.getElementById('modalVideoTitle').textContent = video.title;
+      document.getElementById('modalVideoMeta').textContent = `${video.day} • ${video.date} • المدة: ${video.duration}`;
+      document.getElementById('modalExternalLink').href = video.url;
+
+      updateModalToggleBtn();
+
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${video.ytId}?autoplay=1&rel=0`;
+
+      document.getElementById('videoModal').classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = '';
+      document.getElementById('videoModal').classList.add('hidden');
+      activeModalVideoId = null;
+    }
+
+    function updateModalToggleBtn() {
+      const btn = document.getElementById('modalToggleCompleteBtn');
+      if (!activeModalVideoId) return;
+      const isDone = completedSet.has(activeModalVideoId);
+
+      if (isDone) {
+        btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-emerald-600 text-white hover:bg-emerald-500';
+        btn.innerHTML = '<i class="fa-solid fa-check-double"></i><span>مكتمل ✓ (اضغط للإلغاء)</span>';
+      } else {
+        btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-slate-800 text-slate-200 hover:bg-emerald-600 hover:text-white border border-slate-700';
+        btn.innerHTML = '<i class="fa-solid fa-check"></i><span>تحديد كمكتمل الآن</span>';
+      }
+    }
+
+    function toggleCurrentModalVideo() {
+      if (!activeModalVideoId) return;
+      toggleVideo(activeModalVideoId);
+      updateModalToggleBtn();
+    }
+
+    function navigateModalVideo(direction) {
+      if (!activeModalVideoId) return;
+      const nextId = activeModalVideoId + direction;
+      if (nextId >= 1 && nextId <= RAW_VIDEOS.length) {
+        openVideoModal(nextId);
+      }
+    }
+
+    let activeNotesVideoId = null;
+    function openNotesModal(id) {
+      activeNotesVideoId = id;
+      const video = RAW_VIDEOS.find(v => v.id === id);
+      document.getElementById('notesVideoTitle').textContent = `#${video.id} - ${video.title}`;
+      document.getElementById('noteTextArea').value = notesMap[id] || '';
+      document.getElementById('notesModal').classList.remove('hidden');
+    }
+
+    function closeNotesModal() {
+      document.getElementById('notesModal').classList.add('hidden');
+      activeNotesVideoId = null;
+    }
+
+    function saveNote() {
+      if (!activeNotesVideoId) return;
+      const text = document.getElementById('noteTextArea').value.trim();
+      if (text) {
+        notesMap[activeNotesVideoId] = text;
+      } else {
+        delete notesMap[activeNotesVideoId];
+      }
+      saveState();
+      closeNotesModal();
+      render();
+    }
+
+    function exportUpdatedCSV() {
+      let csvContent = '"Day","Date","Video Title","Video URL","Duration","Status"\\n';
+      
+      RAW_VIDEOS.forEach(v => {
+        const isDone = completedSet.has(v.id);
+        const statusStr = isDone ? '[x] Completed' : '[ ] Pending';
+        const escapedTitle = v.title.replace(/"/g, '""');
+        csvContent += `"${v.day}","${v.date}","${escapedTitle}","${v.url}","${v.duration}","${statusStr}"\\n`;
+      });
+
+      const blob = new Blob(["\\ufeff" + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'Plan_2026_Cisco_CCNA_Updated_Progress.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function openBackupModal() {
+      document.getElementById('backupModal').classList.remove('hidden');
+    }
+
+    function closeBackupModal() {
+      document.getElementById('backupModal').classList.add('hidden');
+    }
+
+    function downloadBackupJSON() {
+      const backupData = {
+        timestamp: new Date().toISOString(),
+        version: '1.0',
+        completedIds: Array.from(completedSet),
+        notes: notesMap
+      };
+
+      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `CCNA_Study_Progress_Backup_${new Date().toISOString().slice(0, 10)}.json`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function handleRestoreFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data && Array.isArray(data.completedIds)) {
+            completedSet = new Set(data.completedIds);
+            if (data.notes) notesMap = data.notes;
+            saveState();
+            updateStats();
+            render();
+            closeBackupModal();
+            alert('تم استعادة التقدم بنجاح!');
+          } else {
+            alert('صيغة الملف غير صالحة.');
+          }
+        } catch (err) {
+          alert('حدث خطأ أثناء قراءة ملف النسخة الاحتياطية.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function confirmReset() {
+      if (confirm('هل أنت متأكد من رغبتك في تصفير كافة مقاطع الخطة وإعادتها إلى قيد الانتظار؟')) {
+        completedSet.clear();
+        saveState();
+        updateStats();
+        render();
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem(STORAGE_KEY_THEME, 'light');
+        document.getElementById('themeIcon').className = 'fa-solid fa-moon';
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem(STORAGE_KEY_THEME, 'dark');
+        document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+      }
+    }
+
+    function applyTheme() {
+      const savedTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'dark';
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('themeIcon').className = 'fa-solid fa-moon';
+      } else {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+      }
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+        closeNotesModal();
+        closeBackupModal();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+        document.getElementById('searchInput').focus();
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
+"""
+
+target_path_1 = os.path.join(os.path.dirname(__file__), 'index.html')
+target_path_2 = os.path.join(os.path.dirname(__file__), 'CCNA_2026_Study_Plan.html')
+
+with open(target_path_1, 'w', encoding='utf-8') as f:
+    f.write(html_template)
+
+with open(target_path_2, 'w', encoding='utf-8') as f:
+    f.write(html_template)
+
+print('Success! Generated index.html and CCNA_2026_Study_Plan.html')

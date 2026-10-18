@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
+    .font-num { font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.4); }
+    ::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.3); border-radius: 3px; }
+  </style>
+</head>
+<body class="text-slate-100 p-2 sm:p-4">
+  <div class="max-w-4xl mx-auto space-y-5">
+    
+    <!-- Top Hero Card -->
+    <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-900/95 via-slate-900/80 to-slate-950 border border-slate-800 shadow-xl backdrop-blur-xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-600 to-emerald-500 flex items-center justify-center text-white text-xl font-black shadow-lg shadow-sky-600/30 shrink-0">
+            <i class="fa-solid fa-network-wired"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30 font-num">CCNA 200-301 v1.1</span>
+              <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">2026 Plan</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5">لوحة متابعة وإنجاز كورس سيسكو CCNA</h2>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-center">
+          <a href="index.html" target="_blank" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-sky-600/30 transition">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>فتح التطبيق التفاعلي بالكامل</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 pt-4 border-t border-slate-800/80 text-center">
+        <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+          <span class="text-[11px] text-slate-400 block mb-0.5 font-bold">إجمالي المقاطع</span>
+          <span class="text-xl font-black text-white font-num">221</span>
+          <span class="text-[10px] text-slate-500 block">فيديو تدريبي</span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+          <span class="text-[11px] text-slate-400 block mb-0.5 font-bold">إجمالي الأيام</span>
+          <span class="text-xl font-black text-emerald-400 font-num">25</span>
+          <span class="text-[10px] text-slate-500 block">يوماً دراسياً</span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+          <span class="text-[11px] text-slate-400 block mb-0.5 font-bold">المدة الكلية</span>
+          <span class="text-xl font-black text-sky-400 font-num">~33.5</span>
+          <span class="text-[10px] text-slate-500 block">ساعة تدريبية</span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+          <span class="text-[11px] text-slate-400 block mb-0.5 font-bold">الحفظ والمزامنة</span>
+          <span class="text-xl font-black text-purple-400 font-num">100%</span>
+          <span class="text-[10px] text-slate-500 block">تخزين محلي فوري</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Preview Checklist for First 10 Videos -->
+    <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-emerald-400"></i>
+          <h3 class="text-sm font-bold text-white">معاينة تفاعلية سريعة (انقر لتجربة التحديد):</h3>
+        </div>
+        <span id="previewCounter" class="text-xs font-bold text-slate-400 font-num">0 / 8 مكتمل</span>
+      </div>
+
+      <div id="previewList" class="space-y-2 text-xs">
+        <!-- Javascript renders sample items here -->
+      </div>
+    </div>
+
+    <!-- 25-Day Roadmap Timeline -->
+    <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-calendar-days text-sky-400"></i>
+          <h3 class="text-sm font-bold text-white">خريطة الأيام التدريبية الـ 25 (Roadmap):</h3>
+        </div>
+        <span class="text-[11px] text-slate-500">من 18 أكتوبر إلى 11 نوفمبر 2026</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 max-h-64 overflow-y-auto pr-1">
+
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 1</span>
+            <span class="text-[10px] text-sky-400 font-num">11 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 18, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 81 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 2</span>
+            <span class="text-[10px] text-sky-400 font-num">7 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 19, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 79 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 3</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 20, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 80 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 4</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 21, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 83 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 5</span>
+            <span class="text-[10px] text-sky-400 font-num">7 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 22, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 80 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 6</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 23, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 77 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 7</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 24, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 80 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 8</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 25, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 75 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 9</span>
+            <span class="text-[10px] text-sky-400 font-num">10 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 26, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 81 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 10</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 27, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 83 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 11</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 28, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 85 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 12</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 29, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 76 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 13</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 30, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 80 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 14</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Oct 31, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 81 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 15</span>
+            <span class="text-[10px] text-sky-400 font-num">9 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 1, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 86 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 16</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 2, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 78 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 17</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 3, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 84 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 18</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 4, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 82 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 19</span>
+            <span class="text-[10px] text-sky-400 font-num">7 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 5, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 78 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 20</span>
+            <span class="text-[10px] text-sky-400 font-num">10 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 6, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 84 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 21</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 7, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 80 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 22</span>
+            <span class="text-[10px] text-sky-400 font-num">8 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 8, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 84 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 23</span>
+            <span class="text-[10px] text-sky-400 font-num">11 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 9, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 80 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 24</span>
+            <span class="text-[10px] text-sky-400 font-num">12 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 10, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 80 دقيقة</span>
+        </div>
+    
+        <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white font-num text-xs">Day 25</span>
+            <span class="text-[10px] text-sky-400 font-num">10 دروس</span>
+          </div>
+          <span class="text-[10px] text-slate-500 block font-num mt-0.5">Nov 11, 2026</span>
+          <span class="text-[10px] text-slate-400 block font-num mt-1">⏱️ 74 دقيقة</span>
+        </div>
+    
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const sampleVideos = [{"id": 1, "day": "Day 1", "date": "Oct 18, 2026", "title": "Cisco CCNA 200-301 || مقطع المقدمة || المنهاج الكامل", "url": "https://www.youtube.com/watch?v=TrQljnE49-o", "duration": "3m", "durationMins": 3, "ytId": "TrQljnE49-o", "status": "[ ] Pending"}, {"id": 2, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA Targeted Audience || الجمهور المستهدف || لمن هي؟", "url": "https://www.youtube.com/watch?v=nOSUtLn3D8g", "duration": "8m", "durationMins": 8, "ytId": "nOSUtLn3D8g", "status": "[ ] Pending"}, {"id": 3, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA Exam Nature || طبيعة الامتحان || المحتوى المتوقع", "url": "https://www.youtube.com/watch?v=JXXdVtcVfkk", "duration": "8m", "durationMins": 8, "ytId": "JXXdVtcVfkk", "status": "[ ] Pending"}, {"id": 4, "day": "Day 1", "date": "Oct 18, 2026", "title": "How to write the CCNA Exam || كيفية حجز الامتحان || الطرق المتوفرة", "url": "https://www.youtube.com/watch?v=2kx_3ASOdUw", "duration": "7m", "durationMins": 7, "ytId": "2kx_3ASOdUw", "status": "[ ] Pending"}, {"id": 5, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA Course || YouTube vs. iiinetworking.com || الفرق بين النسختين", "url": "https://www.youtube.com/watch?v=KxuA6Hbf_So", "duration": "8m", "durationMins": 8, "ytId": "KxuA6Hbf_So", "status": "[ ] Pending"}, {"id": 6, "day": "Day 1", "date": "Oct 18, 2026", "title": "Tabby is now Live! || تقسيط الدفعات مع تابي", "url": "https://www.youtube.com/watch?v=TNPO3Dxyz24", "duration": "3m", "durationMins": 3, "ytId": "TNPO3Dxyz24", "status": "[ ] Pending"}, {"id": 7, "day": "Day 1", "date": "Oct 18, 2026", "title": "How to Study the CCNA || كيفية الدراسة || استثمار الموارد", "url": "https://www.youtube.com/watch?v=EYbgIgpfLUM", "duration": "10m", "durationMins": 10, "ytId": "EYbgIgpfLUM", "status": "[ ] Pending"}, {"id": 8, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA 200-301 || Network Fundamentals || الفصل الاول", "url": "https://www.youtube.com/watch?v=rXUVdlwYCtA", "duration": "2m", "durationMins": 2, "ytId": "rXUVdlwYCtA", "status": "[ ] Pending"}];
+    let checkedIds = new Set();
+
+    function renderPreview() {
+      const list = document.getElementById('previewList');
+      let html = '';
+      sampleVideos.forEach(v => {
+        const isDone = checkedIds.has(v.id);
+        html += `
+          <div onclick="togglePreviewItem(${v.id})" class="p-2.5 rounded-xl border flex items-center justify-between gap-3 cursor-pointer transition ${isDone ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-200' : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'}">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-5 h-5 rounded-md flex items-center justify-center shrink-0 border ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-600 bg-slate-900'}">
+                ${isDone ? '<i class="fa-solid fa-check text-[10px]"></i>' : ''}
+              </div>
+              <span class="font-mono text-[10px] text-slate-400 font-num shrink-0">#${v.id}</span>
+              <span class="truncate font-medium ${isDone ? 'line-through text-slate-400' : ''}">${v.title}</span>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-[10px] font-num text-slate-400">⏱️ ${v.duration}</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isDone ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/10 text-amber-400 font-num'}">
+                ${isDone ? 'مكتمل' : 'Pending'}
+              </span>
+            </div>
+          </div>
+        `;
+      });
+      list.innerHTML = html;
+      document.getElementById('previewCounter').textContent = `${checkedIds.size} / ${sampleVideos.length} مكتمل`;
+    }
+
+    function togglePreviewItem(id) {
+      if (checkedIds.has(id)) checkedIds.delete(id);
+      else checkedIds.add(id);
+      renderPreview();
+    }
+
+    renderPreview();
+  </script>
+</body>
+</html>
