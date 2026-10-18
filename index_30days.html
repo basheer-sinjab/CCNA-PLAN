@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خطة Cisco CCNA 200-301 v1.1 | خطة الـ 30 يوماً المقسمة على الأقسام الستة</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            cisco: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .font-num {
+      font-family: 'Inter', sans-serif;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.4);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(56, 189, 248, 0.7);
+    }
+    .video-card-transition {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-enter {
+      animation: modalFadeIn 0.2s ease-out forwards;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-cisco-500 selection:text-white">
+
+  <!-- Main Shell -->
+  <div id="app" class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-6 sm:space-y-8">
+
+    <!-- Version Switcher Bar -->
+    <div class="flex items-center justify-between px-4 py-2.5 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="text-slate-400">أنت الآن في:</span>
+        <span class="font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-md border border-sky-500/20">خطة الـ 30 يوماً (مقسمة بدقة على الأقسام الستة + أيام راحة أسبوعية)</span>
+      </div>
+      <a href="index.html" class="flex items-center gap-1.5 text-slate-400 hover:text-white font-bold transition">
+        <span>الانتقال للنسخة الأصلية (25 يوماً)</span>
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+    </div>
+
+    <!-- Header Banner -->
+    <header class="flex flex-col md:flex-row items-center justify-between gap-5 p-5 sm:p-6 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl backdrop-blur-xl">
+      <div class="flex items-center gap-4 text-right">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-emerald-400 flex items-center justify-center text-white shadow-xl shadow-sky-600/30 text-2xl sm:text-3xl font-black shrink-0">
+          <i class="fa-solid fa-cubes-stacked"></i>
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-cisco-500/20 text-cisco-300 border border-cisco-500/30 font-num">Cisco CCNA 200-301 v1.1</span>
+            <span class="px-3 py-0.5 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">موزعة على الأقسام الـ 6</span>
+            <span class="px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">30 يوماً (مع أيام راحة)</span>
+          </div>
+          <h1 class="text-xl sm:text-3xl font-black text-white mt-1">خطة CCNA 200-301 المقسمة حسب المسارات الرسمية</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">كل قسم يبدأ وينتهي في أيامه الخاصة دون تداخل • 26 يوم دراسة + 4 أيام راحة واسترجاع أسبوعية</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 w-full md:w-auto">
+        <button id="jumpNextBtn" onclick="jumpToNextPending()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cisco-600 hover:bg-cisco-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-cisco-600/30 transition active:scale-95">
+          <i class="fa-solid fa-bolt text-yellow-300"></i>
+          <span>الدرس التالي المطلوب</span>
+        </button>
+
+        <button onclick="exportUpdatedCSV()" title="تصدير ملف CSV محدث بحالة الإنجاز الحالية" class="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 text-xs sm:text-sm font-semibold transition active:scale-95">
+          <i class="fa-solid fa-file-csv text-base"></i>
+          <span>تصدير CSV محدث</span>
+        </button>
+
+        <button onclick="openBackupModal()" title="نسخ احتياطي أو استعادة" class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-medium transition active:scale-95">
+          <i class="fa-solid fa-cloud-arrow-down text-cisco-400"></i>
+          <span class="hidden sm:inline">نسخ / استعادة</span>
+        </button>
+
+        <button onclick="confirmReset()" title="إعادة تعيين التقدم بالكامل" class="p-2.5 rounded-xl bg-slate-800 hover:bg-rose-950/70 hover:text-rose-400 text-slate-400 border border-slate-700 transition active:scale-95">
+          <i class="fa-solid fa-arrow-rotate-right"></i>
+        </button>
+
+        <button onclick="toggleTheme()" id="themeBtn" title="تبديل الوضع الليلي / الفاتح" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition active:scale-95">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- General Stats Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">نسبة الإنجاز الإجمالية</span>
+          <span id="badgeMotivational" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cisco-500/20 text-cisco-400 border border-cisco-500/30">ابدأ الآن 🚀</span>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-2">
+            <span id="statPercent" class="text-4xl sm:text-5xl font-black text-white font-num tracking-tight">0%</span>
+            <span class="text-xs text-slate-400 font-num">من الكورس كاملاً</span>
+          </div>
+          <div class="w-full h-3 bg-slate-800 rounded-full mt-3 overflow-hidden p-0.5 border border-slate-700/60">
+            <div id="statProgressBar" class="h-full bg-gradient-to-r from-sky-500 via-indigo-400 to-emerald-400 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">المقاطع المنجزة</span>
+          <div class="flex items-baseline gap-1.5 font-num">
+            <span id="statCompletedCount" class="text-3xl sm:text-4xl font-black text-emerald-400">0</span>
+            <span class="text-slate-500 text-lg">/</span>
+            <span class="text-slate-400 font-bold text-lg font-num">221</span>
+          </div>
+          <span id="statPendingCount" class="text-xs text-amber-400/90 font-medium mt-1.5 block">المتبقي: 221 مقطع</span>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">الوقت المشاهد</span>
+          <div class="flex items-baseline gap-1.5 font-num">
+            <span id="statCompletedHours" class="text-3xl sm:text-4xl font-black text-cisco-400">0.0</span>
+            <span class="text-slate-500 text-xs">من</span>
+            <span class="text-slate-400 font-bold text-sm">33.5 ساعة</span>
+          </div>
+          <span id="statRemainingHours" class="text-xs text-slate-400 mt-1.5 block font-num">المتبقي: ~33.5 ساعة</span>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-cisco-500/10 border border-cisco-500/25 flex items-center justify-center text-cisco-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">الأقسام المكتملة</span>
+          <div class="flex items-baseline gap-1.5 font-num">
+            <span id="statCompletedSections" class="text-3xl sm:text-4xl font-black text-purple-400">0</span>
+            <span class="text-slate-500 text-lg">/</span>
+            <span class="text-slate-400 font-bold text-lg">6 أقسام</span>
+          </div>
+          <span id="statDaysCount" class="text-xs text-slate-400 mt-1.5 block font-num">26 يوم دراسة + 4 راحة</span>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/25 flex items-center justify-center text-purple-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 6 Cisco Sections Executive Dashboard Grid -->
+    <div class="p-5 sm:p-6 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
+            <i class="fa-solid fa-shapes text-sky-400"></i>
+            <span>لوحة تقدم الأقسام الستة (The 6 CCNA Modules Breakdown)</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">انقر على أي قسم لتصفيته مباشرة وعرض أيامه ودروسه فقط</p>
+        </div>
+        <button onclick="filterBySection(null)" class="text-xs text-sky-400 hover:underline font-bold self-start sm:self-center">
+          عرض جميع الأقسام
+        </button>
+      </div>
+
+      <!-- 6 Sections Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5" id="sectionsCardsGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Celebration Banner -->
+    <div id="congratsBanner" class="hidden p-6 rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cisco-600 text-white shadow-2xl relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-4 text-center sm:text-right">
+          <div class="text-5xl">🏆🎓</div>
+          <div>
+            <h2 class="text-2xl font-black">ألف مبروك! أتممت خطة كورس CCNA 200-301 بالكامل عبر الأقسام الستة!</h2>
+            <p class="text-sm text-emerald-100 mt-1">أنت الآن جاهز للاختبار الدولي وحصد الشهادة بجدارة. بالتوفيق الدائم!</p>
+          </div>
+        </div>
+        <button onclick="triggerConfetti(true)" class="px-5 py-2.5 rounded-xl bg-white text-slate-900 font-bold text-sm shadow hover:bg-emerald-50 transition active:scale-95 flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-champagne-glasses text-emerald-600"></i>
+          <span>إطلاق الاحتفال مجدداً</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Controls, Filter & Search Panel -->
+    <div class="p-5 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
+      
+      <!-- Top Row: Search + Status Tabs + Expand/Collapse -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        
+        <!-- Search Field -->
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            oninput="handleSearch(this.value)" 
+            placeholder="ابحث في عناوين المقاطع، رقم اليوم، القسم (1.0, 2.0, 3.0...) أو المفاهيم..." 
+            class="w-full pr-11 pl-10 py-3 rounded-2xl bg-slate-950/70 border border-slate-700/80 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cisco-500 focus:ring-1 focus:ring-cisco-500 transition"
+          >
+          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Status Filter Tabs -->
+        <div class="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs sm:text-sm font-bold self-start lg:self-center">
+          <button onclick="setStatusFilter('all')" id="filterAll" class="filter-tab px-3.5 py-2 rounded-xl bg-cisco-600 text-white transition">الكل (<span id="countAllTab" class="font-num">221</span>)</button>
+          <button onclick="setStatusFilter('pending')" id="filterPending" class="filter-tab px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition">⏳ قيد الانتظار (<span id="countPendingTab" class="font-num">221</span>)</button>
+          <button onclick="setStatusFilter('completed')" id="filterCompleted" class="filter-tab px-3.5 py-2 rounded-xl text-slate-400 hover:text-white transition">✅ المكتملة (<span id="countCompletedTab" class="font-num">0</span>)</button>
+        </div>
+
+        <!-- Accordions Toggle -->
+        <div class="flex items-center gap-2 self-end lg:self-center">
+          <button onclick="toggleAllAccordions(true)" title="توسيع كافة الأيام" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-chevron-down"></i>
+            <span>فتح الكل</span>
+          </button>
+          <button onclick="toggleAllAccordions(false)" title="طي كافة الأيام" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-chevron-up"></i>
+            <span>طي الكل</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 30 Days Timeline Pills -->
+      <div class="border-t border-slate-800 pt-3">
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+          <span class="flex items-center gap-1.5 font-bold">
+            <i class="fa-solid fa-calendar-days text-sky-400"></i>
+            <span>الجدول الزمني الكامل (Day 1 إلى Day 30):</span>
+          </span>
+          <span class="text-[11px] text-slate-500 hidden sm:inline">أيام الراحة الأسبوعية (7، 14، 21، 28) محددة برمز ☕</span>
+        </div>
+        <div id="dayPillsContainer" class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Active Filter Notification -->
+    <div id="activeFilterAlert" class="hidden flex items-center justify-between px-5 py-3 rounded-2xl bg-cisco-900/40 border border-cisco-600/50 text-cisco-200 text-xs sm:text-sm">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-filter text-cisco-400"></i>
+        <span id="activeFilterText">تصفية مفعّلة</span>
+      </div>
+      <button onclick="resetFilters()" class="text-xs text-cisco-300 hover:underline font-bold">إلغاء التصفية وعرض الكل</button>
+    </div>
+
+    <!-- Main Content Container: Grouped Days & Videos -->
+    <main id="videosContainer" class="space-y-6">
+      <!-- Injected by JavaScript -->
+    </main>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-16 px-4 bg-slate-900/40 rounded-3xl border border-slate-800">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 text-2xl">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-200">لم يتم العثور على مقاطع مطابقة لبحثك</h3>
+      <p class="text-sm text-slate-400 mt-1">جرّب البحث بكلمة أخرى أو قم بإلغاء الفلاتر المحددة</p>
+      <button onclick="resetFilters()" class="mt-4 px-5 py-2.5 rounded-xl bg-cisco-600 text-white text-xs font-bold hover:bg-cisco-500 transition">
+        إعادة تعيين الفلاتر
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pt-8 pb-12 text-center text-xs text-slate-500 border-t border-slate-800/80 space-y-2">
+      <div class="flex items-center justify-center gap-2">
+        <span>خطة دراسة وتتبع Cisco CCNA 200-301 (v1.1) - خطة الـ 30 يوماً المقسمة على الأقسام الستة</span>
+        <span>•</span>
+        <span>حفظ تلقائي لتقدمك وملاحظاتك في المتصفح</span>
+      </div>
+      <p>كل قسم دراسي ينتهي قبل البدء في القسم التالي بدون أي تداخل</p>
+    </footer>
+
+  </div>
+
+  <!-- Video Modal (YouTube Embedded Player) -->
+  <div id="videoModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-4xl overflow-hidden shadow-2xl modal-enter flex flex-col">
+      <div class="flex items-center justify-between p-4 sm:p-5 border-b border-slate-800 bg-slate-950/60">
+        <div class="flex items-center gap-3 overflow-hidden">
+          <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-500 flex items-center justify-center shrink-0">
+            <i class="fa-brands fa-youtube text-xl"></i>
+          </div>
+          <div class="truncate">
+            <h3 id="modalVideoTitle" class="text-sm sm:text-base font-bold text-white truncate">عنوان الفيديو</h3>
+            <span id="modalVideoMeta" class="text-xs text-slate-400 font-num">Day 1 • Oct 18, 2026 • 14m</span>
+          </div>
+        </div>
+        <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="relative w-full aspect-video bg-black">
+        <iframe 
+          id="videoIframe" 
+          class="w-full h-full" 
+          src="" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 p-4 border-t border-slate-800 bg-slate-950/50">
+        <button id="modalToggleCompleteBtn" onclick="toggleCurrentModalVideo()" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition active:scale-95">
+          <i class="fa-solid fa-check"></i>
+          <span>تحديد كمكتمل</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button id="modalPrevBtn" onclick="navigateModalVideo(-1)" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>السابق</span>
+          </button>
+          <button id="modalNextBtn" onclick="navigateModalVideo(1)" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition flex items-center gap-1.5">
+            <span>التالي</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cisco-400 text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>يوتيوب</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes Modal -->
+  <div id="notesModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl modal-enter">
+      <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+        <div class="flex items-center gap-2 text-white font-bold text-sm sm:text-base">
+          <i class="fa-solid fa-pen-to-square text-cisco-400"></i>
+          <span>ملاحظات الدرس الشخصية</span>
+        </div>
+        <button onclick="closeNotesModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl hover:bg-slate-800">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 space-y-3">
+        <div class="text-xs text-slate-300 font-semibold" id="notesVideoTitle">عنوان الدرس</div>
+        <textarea 
+          id="noteTextArea" 
+          rows="6" 
+          placeholder="سجّل هنا أهم الأوامر، المفاهيم، أو الملاحظات التي تحتاج مراجعتها..." 
+          class="w-full p-3.5 rounded-2xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cisco-500 focus:ring-1 focus:ring-cisco-500"
+        ></textarea>
+        <div class="text-[11px] text-slate-400">يتم حفظ الملاحظات محلياً في متصفحك وتبقى دائماً.</div>
+      </div>
+      <div class="p-4 border-t border-slate-800 flex justify-end gap-2 bg-slate-950/50">
+        <button onclick="closeNotesModal()" class="px-4 py-2 rounded-xl text-slate-400 hover:text-white text-xs font-semibold">إلغاء</button>
+        <button onclick="saveNote()" class="px-5 py-2 rounded-xl bg-cisco-600 hover:bg-cisco-500 text-white text-xs font-bold shadow">حفظ الملاحظة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backup & Restore Modal -->
+  <div id="backupModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl modal-enter">
+      <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+        <div class="flex items-center gap-2 text-white font-bold text-sm sm:text-base">
+          <i class="fa-solid fa-database text-cisco-400"></i>
+          <span>النسخ الاحتياطي والاستعادة</span>
+        </div>
+        <button onclick="closeBackupModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl hover:bg-slate-800">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 space-y-5">
+        <div>
+          <h4 class="text-xs font-bold text-slate-300 uppercase mb-1">تصدير نسخة احتياطية (JSON)</h4>
+          <p class="text-xs text-slate-400 mb-2.5">تحميل ملف JSON يشمل كافة المقاطع التي قمت بإنجازها مع ملاحظاتك الخاصة.</p>
+          <button onclick="downloadBackupJSON()" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-cisco-400 border border-slate-700 text-xs font-bold flex items-center justify-center gap-2 transition">
+            <i class="fa-solid fa-download"></i>
+            <span>تحميل ملف النسخة الاحتياطية</span>
+          </button>
+        </div>
+
+        <div class="border-t border-slate-800 pt-4">
+          <h4 class="text-xs font-bold text-slate-300 uppercase mb-1">استعادة نسخة سابقة</h4>
+          <p class="text-xs text-slate-400 mb-2.5">اختر ملف JSON محفوظ سابقاً لاستعادة تقدمك فوراً.</p>
+          <input type="file" id="restoreFileInput" accept=".json" class="hidden" onchange="handleRestoreFile(event)">
+          <button onclick="document.getElementById('restoreFileInput').click()" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 text-xs font-bold flex items-center justify-center gap-2 transition">
+            <i class="fa-solid fa-upload"></i>
+            <span>اختيار ملف JSON للاستعادة</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const CALENDAR_DATA = [{"calendar_day": 1, "day_label": "Day 1", "date": "Oct 18, 2026", "is_rest_day": false, "study_day_num": 1, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 1, "sec_total_days": 8, "videos": [{"id": 1, "day": "Day 1", "date": "Oct 18, 2026", "title": "Cisco CCNA 200-301 || مقطع المقدمة || المنهاج الكامل", "url": "https://www.youtube.com/watch?v=TrQljnE49-o", "duration": "3m", "durationMins": 3, "ytId": "TrQljnE49-o", "status": "[ ] Pending"}, {"id": 2, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA Targeted Audience || الجمهور المستهدف || لمن هي؟", "url": "https://www.youtube.com/watch?v=nOSUtLn3D8g", "duration": "8m", "durationMins": 8, "ytId": "nOSUtLn3D8g", "status": "[ ] Pending"}, {"id": 3, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA Exam Nature || طبيعة الامتحان || المحتوى المتوقع", "url": "https://www.youtube.com/watch?v=JXXdVtcVfkk", "duration": "8m", "durationMins": 8, "ytId": "JXXdVtcVfkk", "status": "[ ] Pending"}, {"id": 4, "day": "Day 1", "date": "Oct 18, 2026", "title": "How to write the CCNA Exam || كيفية حجز الامتحان || الطرق المتوفرة", "url": "https://www.youtube.com/watch?v=2kx_3ASOdUw", "duration": "7m", "durationMins": 7, "ytId": "2kx_3ASOdUw", "status": "[ ] Pending"}, {"id": 5, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA Course || YouTube vs. iiinetworking.com || الفرق بين النسختين", "url": "https://www.youtube.com/watch?v=KxuA6Hbf_So", "duration": "8m", "durationMins": 8, "ytId": "KxuA6Hbf_So", "status": "[ ] Pending"}, {"id": 6, "day": "Day 1", "date": "Oct 18, 2026", "title": "Tabby is now Live! || تقسيط الدفعات مع تابي", "url": "https://www.youtube.com/watch?v=TNPO3Dxyz24", "duration": "3m", "durationMins": 3, "ytId": "TNPO3Dxyz24", "status": "[ ] Pending"}, {"id": 7, "day": "Day 1", "date": "Oct 18, 2026", "title": "How to Study the CCNA || كيفية الدراسة || استثمار الموارد", "url": "https://www.youtube.com/watch?v=EYbgIgpfLUM", "duration": "10m", "durationMins": 10, "ytId": "EYbgIgpfLUM", "status": "[ ] Pending"}, {"id": 8, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA 200-301 || Network Fundamentals || الفصل الاول", "url": "https://www.youtube.com/watch?v=rXUVdlwYCtA", "duration": "2m", "durationMins": 2, "ytId": "rXUVdlwYCtA", "status": "[ ] Pending"}, {"id": 9, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA 200-301 || What is a Network? || Network Types", "url": "https://www.youtube.com/watch?v=tg0u9WAXrcY", "duration": "14m", "durationMins": 14, "ytId": "tg0u9WAXrcY", "status": "[ ] Pending"}]}, {"calendar_day": 2, "day_label": "Day 2", "date": "Oct 19, 2026", "is_rest_day": false, "study_day_num": 2, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 2, "sec_total_days": 8, "videos": [{"id": 10, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA 200-301 || What is a Network/Network Types Quiz || عينة من اختبارات الفصل", "url": "https://www.youtube.com/watch?v=axUjmL-9Uuc", "duration": "3m", "durationMins": 3, "ytId": "axUjmL-9Uuc", "status": "[ ] Pending"}, {"id": 11, "day": "Day 1", "date": "Oct 18, 2026", "title": "CCNA 200-301 || Network Components", "url": "https://www.youtube.com/watch?v=EAkasx2_wzE", "duration": "15m", "durationMins": 15, "ytId": "EAkasx2_wzE", "status": "[ ] Pending"}, {"id": 12, "day": "Day 2", "date": "Oct 19, 2026", "title": "CCNA 200-301 || Network Topologies", "url": "https://www.youtube.com/watch?v=LqiW6fqgCdI", "duration": "8m", "durationMins": 8, "ytId": "LqiW6fqgCdI", "status": "[ ] Pending"}, {"id": 13, "day": "Day 2", "date": "Oct 19, 2026", "title": "CCNA 200-301 || Enterprise Network Design", "url": "https://www.youtube.com/watch?v=ZlAZdjI0S-U", "duration": "14m", "durationMins": 14, "ytId": "ZlAZdjI0S-U", "status": "[ ] Pending"}, {"id": 14, "day": "Day 2", "date": "Oct 19, 2026", "title": "CCNA 200-301 || Cisco Products", "url": "https://www.youtube.com/watch?v=VEGDUD3vOZQ", "duration": "6m", "durationMins": 6, "ytId": "VEGDUD3vOZQ", "status": "[ ] Pending"}, {"id": 15, "day": "Day 2", "date": "Oct 19, 2026", "title": "CCNA 200-301 || On-Premise Networks", "url": "https://www.youtube.com/watch?v=cfz36ztujUA", "duration": "14m", "durationMins": 14, "ytId": "cfz36ztujUA", "status": "[ ] Pending"}, {"id": 16, "day": "Day 2", "date": "Oct 19, 2026", "title": "CCNA 200-301 || Cloud Networks", "url": "https://www.youtube.com/watch?v=W9nQRYTR6RA", "duration": "10m", "durationMins": 10, "ytId": "W9nQRYTR6RA", "status": "[ ] Pending"}, {"id": 17, "day": "Day 2", "date": "Oct 19, 2026", "title": "CCNA 200-301 || Network Architecture Models", "url": "https://www.youtube.com/watch?v=lj5YuwaEOw0", "duration": "15m", "durationMins": 15, "ytId": "lj5YuwaEOw0", "status": "[ ] Pending"}, {"id": 18, "day": "Day 2", "date": "Oct 19, 2026", "title": "CCNA 200-301 || Copper Cables", "url": "https://www.youtube.com/watch?v=V7UZ1pem8io", "duration": "12m", "durationMins": 12, "ytId": "V7UZ1pem8io", "status": "[ ] Pending"}]}, {"calendar_day": 3, "day_label": "Day 3", "date": "Oct 20, 2026", "is_rest_day": false, "study_day_num": 3, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 3, "sec_total_days": 8, "videos": [{"id": 19, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || Fiber Optic Cables - Part.1", "url": "https://www.youtube.com/watch?v=AndJ8oy34gk", "duration": "12m", "durationMins": 12, "ytId": "AndJ8oy34gk", "status": "[ ] Pending"}, {"id": 20, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || Fiber Optic Cables - Part.2", "url": "https://www.youtube.com/watch?v=9lXyWhVheZs", "duration": "6m", "durationMins": 6, "ytId": "9lXyWhVheZs", "status": "[ ] Pending"}, {"id": 21, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || Point-to-Point & Shared Media", "url": "https://www.youtube.com/watch?v=yqXrQDM42v8", "duration": "5m", "durationMins": 5, "ytId": "yqXrQDM42v8", "status": "[ ] Pending"}, {"id": 22, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || Power over Ethernet (POE)", "url": "https://www.youtube.com/watch?v=Op16RaKruJQ", "duration": "7m", "durationMins": 7, "ytId": "Op16RaKruJQ", "status": "[ ] Pending"}, {"id": 23, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || Collisions", "url": "https://www.youtube.com/watch?v=-BGvXGD8foU", "duration": "4m", "durationMins": 4, "ytId": "-BGvXGD8foU", "status": "[ ] Pending"}, {"id": 24, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || The MAC Address", "url": "https://www.youtube.com/watch?v=JKXsFQEqr58", "duration": "12m", "durationMins": 12, "ytId": "JKXsFQEqr58", "status": "[ ] Pending"}, {"id": 25, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || Internet Protocol version 4", "url": "https://www.youtube.com/watch?v=ljK9Fa3MJi8", "duration": "10m", "durationMins": 10, "ytId": "ljK9Fa3MJi8", "status": "[ ] Pending"}, {"id": 26, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || The Subnet Mask", "url": "https://www.youtube.com/watch?v=CKO3GLK5FkE", "duration": "11m", "durationMins": 11, "ytId": "CKO3GLK5FkE", "status": "[ ] Pending"}, {"id": 27, "day": "Day 3", "date": "Oct 20, 2026", "title": "CCNA 200-301 || VLSM - Example-1", "url": "https://www.youtube.com/watch?v=EiMFuOu5tAY", "duration": "13m", "durationMins": 13, "ytId": "EiMFuOu5tAY", "status": "[ ] Pending"}]}, {"calendar_day": 4, "day_label": "Day 4", "date": "Oct 21, 2026", "is_rest_day": false, "study_day_num": 4, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 4, "sec_total_days": 8, "videos": [{"id": 28, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || VLSM - Example-2", "url": "https://www.youtube.com/watch?v=C-eoEBVKWMw", "duration": "12m", "durationMins": 12, "ytId": "C-eoEBVKWMw", "status": "[ ] Pending"}, {"id": 29, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || VLSM - Example-3,4", "url": "https://www.youtube.com/watch?v=nE4xbnhFFVo", "duration": "5m", "durationMins": 5, "ytId": "nE4xbnhFFVo", "status": "[ ] Pending"}, {"id": 30, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || VLSM - Example-5", "url": "https://www.youtube.com/watch?v=ko66SQLA0WQ", "duration": "10m", "durationMins": 10, "ytId": "ko66SQLA0WQ", "status": "[ ] Pending"}, {"id": 31, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || VLSM - Example-6,7,8", "url": "https://www.youtube.com/watch?v=muYV1RtRQE4", "duration": "12m", "durationMins": 12, "ytId": "muYV1RtRQE4", "status": "[ ] Pending"}, {"id": 32, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || IPv4 Classes", "url": "https://www.youtube.com/watch?v=NJBwhoXub_A", "duration": "9m", "durationMins": 9, "ytId": "NJBwhoXub_A", "status": "[ ] Pending"}, {"id": 33, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || IPv4 Types", "url": "https://www.youtube.com/watch?v=ddrSDAqS2do", "duration": "12m", "durationMins": 12, "ytId": "ddrSDAqS2do", "status": "[ ] Pending"}, {"id": 34, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || The P2P Subnet", "url": "https://www.youtube.com/watch?v=3vFZBZacBj8", "duration": "5m", "durationMins": 5, "ytId": "3vFZBZacBj8", "status": "[ ] Pending"}, {"id": 35, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || CIDR - Example-1", "url": "https://www.youtube.com/watch?v=-AL7uI9c30k", "duration": "10m", "durationMins": 10, "ytId": "-AL7uI9c30k", "status": "[ ] Pending"}, {"id": 36, "day": "Day 4", "date": "Oct 21, 2026", "title": "CCNA 200-301 || CIDR - Example-2", "url": "https://www.youtube.com/watch?v=7Q3m4TIutuQ", "duration": "8m", "durationMins": 8, "ytId": "7Q3m4TIutuQ", "status": "[ ] Pending"}]}, {"calendar_day": 5, "day_label": "Day 5", "date": "Oct 22, 2026", "is_rest_day": false, "study_day_num": 5, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 5, "sec_total_days": 8, "videos": [{"id": 37, "day": "Day 5", "date": "Oct 22, 2026", "title": "CCNA 200-301 || CIDR - Example-3,4,5", "url": "https://www.youtube.com/watch?v=LsCaXh0157Y", "duration": "12m", "durationMins": 12, "ytId": "LsCaXh0157Y", "status": "[ ] Pending"}, {"id": 38, "day": "Day 5", "date": "Oct 22, 2026", "title": "CCNA 200-301 || IPv6 / The Binary Conversion", "url": "https://www.youtube.com/watch?v=pmHa7ikEYys", "duration": "15m", "durationMins": 15, "ytId": "pmHa7ikEYys", "status": "[ ] Pending"}, {"id": 39, "day": "Day 5", "date": "Oct 22, 2026", "title": "CCNA 200-301 || IPv6 Address Structure", "url": "https://www.youtube.com/watch?v=ur2eiuq5S1Y", "duration": "9m", "durationMins": 9, "ytId": "ur2eiuq5S1Y", "status": "[ ] Pending"}, {"id": 40, "day": "Day 5", "date": "Oct 22, 2026", "title": "CCNA 200-301 || IPv6 Address Compression", "url": "https://www.youtube.com/watch?v=srhwd0sRmWI", "duration": "12m", "durationMins": 12, "ytId": "srhwd0sRmWI", "status": "[ ] Pending"}, {"id": 41, "day": "Day 5", "date": "Oct 22, 2026", "title": "CCNA 200-301 || IPv6 Address Types", "url": "https://www.youtube.com/watch?v=KFDDYAYWV8E", "duration": "10m", "durationMins": 10, "ytId": "KFDDYAYWV8E", "status": "[ ] Pending"}, {"id": 42, "day": "Day 5", "date": "Oct 22, 2026", "title": "CCNA 200-301 || IPv6 Interface ID", "url": "https://www.youtube.com/watch?v=84CyVuqt6Wo", "duration": "13m", "durationMins": 13, "ytId": "84CyVuqt6Wo", "status": "[ ] Pending"}, {"id": 43, "day": "Day 5", "date": "Oct 22, 2026", "title": "CCNA 200-301 || The Transportation Layer", "url": "https://www.youtube.com/watch?v=LFcayypSi2k", "duration": "9m", "durationMins": 9, "ytId": "LFcayypSi2k", "status": "[ ] Pending"}, {"id": 44, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || TCP vs. UDP", "url": "https://www.youtube.com/watch?v=DNIiMMa0JxA", "duration": "8m", "durationMins": 8, "ytId": "DNIiMMa0JxA", "status": "[ ] Pending"}]}, {"calendar_day": 6, "day_label": "Day 6", "date": "Oct 23, 2026", "is_rest_day": false, "study_day_num": 6, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 6, "sec_total_days": 8, "videos": [{"id": 45, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || Wireless Principles", "url": "https://www.youtube.com/watch?v=ptZQuxpQvag", "duration": "10m", "durationMins": 10, "ytId": "ptZQuxpQvag", "status": "[ ] Pending"}, {"id": 46, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || Wireless Network Components", "url": "https://www.youtube.com/watch?v=kqQ-QNu8Dd4", "duration": "9m", "durationMins": 9, "ytId": "kqQ-QNu8Dd4", "status": "[ ] Pending"}, {"id": 47, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || Wireless Modes/Terms - Part.1", "url": "https://www.youtube.com/watch?v=M8t3fVMgIYA", "duration": "12m", "durationMins": 12, "ytId": "M8t3fVMgIYA", "status": "[ ] Pending"}, {"id": 48, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || Wireless Modes/Terms - Part.2", "url": "https://www.youtube.com/watch?v=6mGieI6KctA", "duration": "5m", "durationMins": 5, "ytId": "6mGieI6KctA", "status": "[ ] Pending"}, {"id": 49, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || Wireless Frequencies", "url": "https://www.youtube.com/watch?v=VGyoyQMEMdg", "duration": "12m", "durationMins": 12, "ytId": "VGyoyQMEMdg", "status": "[ ] Pending"}, {"id": 50, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || The Physical Deployment", "url": "https://www.youtube.com/watch?v=4aEiMGloln0", "duration": "7m", "durationMins": 7, "ytId": "4aEiMGloln0", "status": "[ ] Pending"}, {"id": 51, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || The Virtualization Concept", "url": "https://www.youtube.com/watch?v=glh16HAeEAw", "duration": "8m", "durationMins": 8, "ytId": "glh16HAeEAw", "status": "[ ] Pending"}, {"id": 52, "day": "Day 6", "date": "Oct 23, 2026", "title": "CCNA 200-301 || The Hypervisor", "url": "https://www.youtube.com/watch?v=QehqO8YGErk", "duration": "6m", "durationMins": 6, "ytId": "QehqO8YGErk", "status": "[ ] Pending"}]}, {"calendar_day": 7, "day_label": "Day 7", "date": "Oct 24, 2026", "is_rest_day": true, "title": "يوم راحة ومراجعة أسبوعي (Week 1 Rest & Review)", "videos": []}, {"calendar_day": 8, "day_label": "Day 8", "date": "Oct 25, 2026", "is_rest_day": false, "study_day_num": 7, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 7, "sec_total_days": 8, "videos": [{"id": 53, "day": "Day 7", "date": "Oct 24, 2026", "title": "CCNA 200-301 || Containers", "url": "https://www.youtube.com/watch?v=e25iKQbxXIM", "duration": "10m", "durationMins": 10, "ytId": "e25iKQbxXIM", "status": "[ ] Pending"}, {"id": 54, "day": "Day 7", "date": "Oct 24, 2026", "title": "CCNA 200-301 || The Switching Concept", "url": "https://www.youtube.com/watch?v=U3GaPdo0OFw", "duration": "5m", "durationMins": 5, "ytId": "U3GaPdo0OFw", "status": "[ ] Pending"}, {"id": 55, "day": "Day 7", "date": "Oct 24, 2026", "title": "CCNA 200-301 || The MAC/ARP Tables", "url": "https://www.youtube.com/watch?v=rwJFTOryRv8", "duration": "11m", "durationMins": 11, "ytId": "rwJFTOryRv8", "status": "[ ] Pending"}, {"id": 56, "day": "Day 7", "date": "Oct 24, 2026", "title": "CCNA 200-301 || Module-1 Review || مراجعة الفصل الأول", "url": "https://www.youtube.com/watch?v=Evwp-UppzHE", "duration": "17m", "durationMins": 17, "ytId": "Evwp-UppzHE", "status": "[ ] Pending"}, {"id": 57, "day": "Day 7", "date": "Oct 24, 2026", "title": "CCNA 200-301 || Cisco Packet Tracer / Cisco IOS", "url": "https://www.youtube.com/watch?v=6e1V1sFZj4k", "duration": "3m", "durationMins": 3, "ytId": "6e1V1sFZj4k", "status": "[ ] Pending"}, {"id": 58, "day": "Day 7", "date": "Oct 24, 2026", "title": "2023 Cisco Packet Tracer 8.2.0 || اشترك , حمل , شغل , اخر نسخة", "url": "https://www.youtube.com/watch?v=WZo5jbD-JBI", "duration": "9m", "durationMins": 9, "ytId": "WZo5jbD-JBI", "status": "[ ] Pending"}, {"id": 59, "day": "Day 7", "date": "Oct 24, 2026", "title": "CCNA 200-301 || Cisco Packet Tracer Review", "url": "https://www.youtube.com/watch?v=seyPzCa6Pt8", "duration": "9m", "durationMins": 9, "ytId": "seyPzCa6Pt8", "status": "[ ] Pending"}, {"id": 60, "day": "Day 7", "date": "Oct 24, 2026", "title": "CCNA 200-301 || First Topology Design", "url": "https://www.youtube.com/watch?v=jQBvkPWxeek", "duration": "16m", "durationMins": 16, "ytId": "jQBvkPWxeek", "status": "[ ] Pending"}]}, {"calendar_day": 9, "day_label": "Day 9", "date": "Oct 26, 2026", "is_rest_day": false, "study_day_num": 8, "section_code": "1.0", "section_name": "1.0 Network Fundamentals", "section_ar": "أساسيات الشبكات", "section_color": "sky", "sec_day_index": 8, "sec_total_days": 8, "videos": [{"id": 61, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Cisco Platform Design", "url": "https://www.youtube.com/watch?v=6MHtwZI0G3Y", "duration": "15m", "durationMins": 15, "ytId": "6MHtwZI0G3Y", "status": "[ ] Pending"}, {"id": 62, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Add Multi-layer Switches", "url": "https://www.youtube.com/watch?v=37RsiFHoYqE", "duration": "5m", "durationMins": 5, "ytId": "37RsiFHoYqE", "status": "[ ] Pending"}, {"id": 63, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Cisco IOS CLI", "url": "https://www.youtube.com/watch?v=1_uy3FurCO0", "duration": "9m", "durationMins": 9, "ytId": "1_uy3FurCO0", "status": "[ ] Pending"}, {"id": 64, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Show Commands", "url": "https://www.youtube.com/watch?v=qopE698aPMQ", "duration": "12m", "durationMins": 12, "ytId": "qopE698aPMQ", "status": "[ ] Pending"}, {"id": 65, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Global Configuration Mode", "url": "https://www.youtube.com/watch?v=y_Pr5343gaY", "duration": "4m", "durationMins": 4, "ytId": "y_Pr5343gaY", "status": "[ ] Pending"}, {"id": 66, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Build 2-Tier LAB - Part.1", "url": "https://www.youtube.com/watch?v=ZIj6OLpX2qQ", "duration": "17m", "durationMins": 17, "ytId": "ZIj6OLpX2qQ", "status": "[ ] Pending"}, {"id": 67, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Build 2-Tier LAB - Part.2", "url": "https://www.youtube.com/watch?v=JmEqnPeuuFg", "duration": "7m", "durationMins": 7, "ytId": "JmEqnPeuuFg", "status": "[ ] Pending"}, {"id": 68, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Cisco Packet Tracer / Cisco IOS Review || مراجعة المحاكي ونظام التشغيل", "url": "https://www.youtube.com/watch?v=Xyt4J9Wt7Fg", "duration": "4m", "durationMins": 4, "ytId": "Xyt4J9Wt7Fg", "status": "[ ] Pending"}]}, {"calendar_day": 10, "day_label": "Day 10", "date": "Oct 27, 2026", "is_rest_day": false, "study_day_num": 9, "section_code": "2.0", "section_name": "2.0 Network Access", "section_ar": "الوصول إلى الشبكة والبنية التحتية", "section_color": "indigo", "sec_day_index": 1, "sec_total_days": 4, "videos": [{"id": 69, "day": "Day 8", "date": "Oct 25, 2026", "title": "CCNA 200-301 || Module-2 || Network Access", "url": "https://www.youtube.com/watch?v=m25JgfxV6zM", "duration": "2m", "durationMins": 2, "ytId": "m25JgfxV6zM", "status": "[ ] Pending"}, {"id": 70, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || The Theory of Broadcast", "url": "https://www.youtube.com/watch?v=MZk7IQ8_zfw", "duration": "13m", "durationMins": 13, "ytId": "MZk7IQ8_zfw", "status": "[ ] Pending"}, {"id": 71, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || The Theory of Broadcast Quiz ||  عينة من اختبارات الفصل", "url": "https://www.youtube.com/watch?v=O8y_QyRHHps", "duration": "3m", "durationMins": 3, "ytId": "O8y_QyRHHps", "status": "[ ] Pending"}, {"id": 72, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || The Concept of VLAN", "url": "https://www.youtube.com/watch?v=8jdt1LnczlY", "duration": "10m", "durationMins": 10, "ytId": "8jdt1LnczlY", "status": "[ ] Pending"}, {"id": 73, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || Default Behavior of Switches", "url": "https://www.youtube.com/watch?v=Ul0_xYTGzsI", "duration": "7m", "durationMins": 7, "ytId": "Ul0_xYTGzsI", "status": "[ ] Pending"}, {"id": 74, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || VLAN Port Modes & Types", "url": "https://www.youtube.com/watch?v=skC66qdKQaU", "duration": "6m", "durationMins": 6, "ytId": "skC66qdKQaU", "status": "[ ] Pending"}, {"id": 75, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || VLAN Trunking", "url": "https://www.youtube.com/watch?v=eDm-aySL7pQ", "duration": "4m", "durationMins": 4, "ytId": "eDm-aySL7pQ", "status": "[ ] Pending"}, {"id": 76, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || Voice VLAN", "url": "https://www.youtube.com/watch?v=uVKAZAMpZu8", "duration": "9m", "durationMins": 9, "ytId": "uVKAZAMpZu8", "status": "[ ] Pending"}, {"id": 77, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || VLANs LAB.1 - VLAN Creation", "url": "https://www.youtube.com/watch?v=wyvDmpH1z5I", "duration": "10m", "durationMins": 10, "ytId": "wyvDmpH1z5I", "status": "[ ] Pending"}]}, {"calendar_day": 11, "day_label": "Day 11", "date": "Oct 28, 2026", "is_rest_day": false, "study_day_num": 10, "section_code": "2.0", "section_name": "2.0 Network Access", "section_ar": "الوصول إلى الشبكة والبنية التحتية", "section_color": "indigo", "sec_day_index": 2, "sec_total_days": 4, "videos": [{"id": 78, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || VLANs LAB.2 - Port Modes", "url": "https://www.youtube.com/watch?v=rP4lJ16C28U", "duration": "10m", "durationMins": 10, "ytId": "rP4lJ16C28U", "status": "[ ] Pending"}, {"id": 79, "day": "Day 9", "date": "Oct 26, 2026", "title": "CCNA 200-301 || VLANs LAB.3 - Edit Switches", "url": "https://www.youtube.com/watch?v=IfSSFME3ZwI", "duration": "9m", "durationMins": 9, "ytId": "IfSSFME3ZwI", "status": "[ ] Pending"}, {"id": 80, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || VLANs LAB.4 - Trunk / DTP", "url": "https://www.youtube.com/watch?v=NiLwGri4TFo", "duration": "13m", "durationMins": 13, "ytId": "NiLwGri4TFo", "status": "[ ] Pending"}, {"id": 81, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || VLANs LAB.5 - Verification", "url": "https://www.youtube.com/watch?v=y6Nnn8qj5Rc", "duration": "10m", "durationMins": 10, "ytId": "y6Nnn8qj5Rc", "status": "[ ] Pending"}, {"id": 82, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || The Loop Theory", "url": "https://www.youtube.com/watch?v=PDBY3VgGBZU", "duration": "9m", "durationMins": 9, "ytId": "PDBY3VgGBZU", "status": "[ ] Pending"}, {"id": 83, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || Spanning-Tree Protocol", "url": "https://www.youtube.com/watch?v=PHvH3fwwoPk", "duration": "8m", "durationMins": 8, "ytId": "PHvH3fwwoPk", "status": "[ ] Pending"}, {"id": 84, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || STP Elections", "url": "https://www.youtube.com/watch?v=bZLcEVX9coE", "duration": "10m", "durationMins": 10, "ytId": "bZLcEVX9coE", "status": "[ ] Pending"}, {"id": 85, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || STP Process", "url": "https://www.youtube.com/watch?v=MWgTSz4Bv5o", "duration": "9m", "durationMins": 9, "ytId": "MWgTSz4Bv5o", "status": "[ ] Pending"}]}, {"calendar_day": 12, "day_label": "Day 12", "date": "Oct 29, 2026", "is_rest_day": false, "study_day_num": 11, "section_code": "2.0", "section_name": "2.0 Network Access", "section_ar": "الوصول إلى الشبكة والبنية التحتية", "section_color": "indigo", "sec_day_index": 3, "sec_total_days": 4, "videos": [{"id": 86, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || STP LAB.1 - Root Bridge", "url": "https://www.youtube.com/watch?v=kFekSViNfcE", "duration": "8m", "durationMins": 8, "ytId": "kFekSViNfcE", "status": "[ ] Pending"}, {"id": 87, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || STP LAB.2 - Root Priority", "url": "https://www.youtube.com/watch?v=522Gi0u1i7g", "duration": "9m", "durationMins": 9, "ytId": "522Gi0u1i7g", "status": "[ ] Pending"}, {"id": 88, "day": "Day 10", "date": "Oct 27, 2026", "title": "CCNA 200-301 || STP LAB.3 - Port Cost", "url": "https://www.youtube.com/watch?v=zh0T2BHqadM", "duration": "7m", "durationMins": 7, "ytId": "zh0T2BHqadM", "status": "[ ] Pending"}, {"id": 89, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || Rapid STP", "url": "https://www.youtube.com/watch?v=6HIzKKsXfNM", "duration": "8m", "durationMins": 8, "ytId": "6HIzKKsXfNM", "status": "[ ] Pending"}, {"id": 90, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || Per-VLAN STP", "url": "https://www.youtube.com/watch?v=Js1S17xFbcw", "duration": "12m", "durationMins": 12, "ytId": "Js1S17xFbcw", "status": "[ ] Pending"}, {"id": 91, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || STP LAB.4 - RPVST+", "url": "https://www.youtube.com/watch?v=JbcCkM7VEXk", "duration": "11m", "durationMins": 11, "ytId": "JbcCkM7VEXk", "status": "[ ] Pending"}, {"id": 92, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || STP Design", "url": "https://www.youtube.com/watch?v=U2mtkuT1lvQ", "duration": "12m", "durationMins": 12, "ytId": "U2mtkuT1lvQ", "status": "[ ] Pending"}, {"id": 93, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || Neighbor Discovery", "url": "https://www.youtube.com/watch?v=o9ypBPrW2A4", "duration": "16m", "durationMins": 16, "ytId": "o9ypBPrW2A4", "status": "[ ] Pending"}]}, {"calendar_day": 13, "day_label": "Day 13", "date": "Oct 30, 2026", "is_rest_day": false, "study_day_num": 12, "section_code": "2.0", "section_name": "2.0 Network Access", "section_ar": "الوصول إلى الشبكة والبنية التحتية", "section_color": "indigo", "sec_day_index": 4, "sec_total_days": 4, "videos": [{"id": 94, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || Link Aggregation", "url": "https://www.youtube.com/watch?v=6MOpYoYIOPI", "duration": "9m", "durationMins": 9, "ytId": "6MOpYoYIOPI", "status": "[ ] Pending"}, {"id": 95, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || Bundling Protocols", "url": "https://www.youtube.com/watch?v=PTg9R4J9AHA", "duration": "6m", "durationMins": 6, "ytId": "PTg9R4J9AHA", "status": "[ ] Pending"}, {"id": 96, "day": "Day 11", "date": "Oct 28, 2026", "title": "CCNA 200-301 || LACP - LAB.1", "url": "https://www.youtube.com/watch?v=2KOfR54GQsg", "duration": "11m", "durationMins": 11, "ytId": "2KOfR54GQsg", "status": "[ ] Pending"}, {"id": 97, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || LACP - LAB.2", "url": "https://www.youtube.com/watch?v=h9ZlvQvGwNU", "duration": "9m", "durationMins": 9, "ytId": "h9ZlvQvGwNU", "status": "[ ] Pending"}, {"id": 98, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || Access Point Modes", "url": "https://www.youtube.com/watch?v=5kFS_XbPpIw", "duration": "12m", "durationMins": 12, "ytId": "5kFS_XbPpIw", "status": "[ ] Pending"}, {"id": 99, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || WLAN Deployment Models", "url": "https://www.youtube.com/watch?v=V5PnA3SEwwE", "duration": "11m", "durationMins": 11, "ytId": "V5PnA3SEwwE", "status": "[ ] Pending"}, {"id": 100, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || AP Management", "url": "https://www.youtube.com/watch?v=LrCQZ0_CIxY", "duration": "4m", "durationMins": 4, "ytId": "LrCQZ0_CIxY", "status": "[ ] Pending"}, {"id": 101, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || Module-2 Review || مراجعة الفصل الثاني", "url": "https://www.youtube.com/watch?v=DpyMPGygEko", "duration": "7m", "durationMins": 7, "ytId": "DpyMPGygEko", "status": "[ ] Pending"}]}, {"calendar_day": 14, "day_label": "Day 14", "date": "Oct 31, 2026", "is_rest_day": true, "title": "يوم راحة ومراجعة أسبوعي (Week 2 Rest & Review)", "videos": []}, {"calendar_day": 15, "day_label": "Day 15", "date": "Nov 01, 2026", "is_rest_day": false, "study_day_num": 13, "section_code": "3.0", "section_name": "3.0 IP Connectivity", "section_ar": "التوجيه والاتصال الشبكي", "section_color": "emerald", "sec_day_index": 1, "sec_total_days": 5, "videos": [{"id": 102, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || Module-3 || IP Connectivity", "url": "https://www.youtube.com/watch?v=h6OjZlMhGMI", "duration": "3m", "durationMins": 3, "ytId": "h6OjZlMhGMI", "status": "[ ] Pending"}, {"id": 103, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || Router on a Stick", "url": "https://www.youtube.com/watch?v=qro3S4Fu5Jc", "duration": "14m", "durationMins": 14, "ytId": "qro3S4Fu5Jc", "status": "[ ] Pending"}, {"id": 104, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || Router on a Stick Quiz ||  عينة من اختبارات الفصل", "url": "https://www.youtube.com/watch?v=ZeToqcYogxI", "duration": "5m", "durationMins": 5, "ytId": "ZeToqcYogxI", "status": "[ ] Pending"}, {"id": 105, "day": "Day 12", "date": "Oct 29, 2026", "title": "CCNA 200-301 || VLAN CIDR Design", "url": "https://www.youtube.com/watch?v=CEa5b3IXBfc", "duration": "11m", "durationMins": 11, "ytId": "CEa5b3IXBfc", "status": "[ ] Pending"}, {"id": 106, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || VLAN Gateway Design", "url": "https://www.youtube.com/watch?v=Y1NCsfEOVkc", "duration": "14m", "durationMins": 14, "ytId": "Y1NCsfEOVkc", "status": "[ ] Pending"}, {"id": 107, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || Switch Virtual Interface", "url": "https://www.youtube.com/watch?v=bx8o01aIfis", "duration": "4m", "durationMins": 4, "ytId": "bx8o01aIfis", "status": "[ ] Pending"}, {"id": 108, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || A Redundant Gateway", "url": "https://www.youtube.com/watch?v=3bUPYz_mBnE", "duration": "11m", "durationMins": 11, "ytId": "3bUPYz_mBnE", "status": "[ ] Pending"}, {"id": 109, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || Add the Core Routers", "url": "https://www.youtube.com/watch?v=DTFCzOoFhTs", "duration": "10m", "durationMins": 10, "ytId": "DTFCzOoFhTs", "status": "[ ] Pending"}, {"id": 110, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || Routed Interfaces Addressing", "url": "https://www.youtube.com/watch?v=-t9VE_g4KM0", "duration": "10m", "durationMins": 10, "ytId": "-t9VE_g4KM0", "status": "[ ] Pending"}]}, {"calendar_day": 16, "day_label": "Day 16", "date": "Nov 02, 2026", "is_rest_day": false, "study_day_num": 14, "section_code": "3.0", "section_name": "3.0 IP Connectivity", "section_ar": "التوجيه والاتصال الشبكي", "section_color": "emerald", "sec_day_index": 2, "sec_total_days": 5, "videos": [{"id": 111, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || How Routing Works", "url": "https://www.youtube.com/watch?v=cv3U2pg3PaQ", "duration": "10m", "durationMins": 10, "ytId": "cv3U2pg3PaQ", "status": "[ ] Pending"}, {"id": 112, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || Static Host Route", "url": "https://www.youtube.com/watch?v=xu2-ZHvgKc0", "duration": "14m", "durationMins": 14, "ytId": "xu2-ZHvgKc0", "status": "[ ] Pending"}, {"id": 113, "day": "Day 13", "date": "Oct 30, 2026", "title": "CCNA 200-301 || Static Network Route", "url": "https://www.youtube.com/watch?v=eqkLOuMoPL8", "duration": "7m", "durationMins": 7, "ytId": "eqkLOuMoPL8", "status": "[ ] Pending"}, {"id": 114, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || Asymmetric Routing", "url": "https://www.youtube.com/watch?v=vTQxcu1iAl4", "duration": "10m", "durationMins": 10, "ytId": "vTQxcu1iAl4", "status": "[ ] Pending"}, {"id": 115, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || A Million Prefix", "url": "https://www.youtube.com/watch?v=lkTNPqYibMk", "duration": "12m", "durationMins": 12, "ytId": "lkTNPqYibMk", "status": "[ ] Pending"}, {"id": 116, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || Default Static Route", "url": "https://www.youtube.com/watch?v=JuyzpwVsRP0", "duration": "11m", "durationMins": 11, "ytId": "JuyzpwVsRP0", "status": "[ ] Pending"}, {"id": 117, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || OSPF Basics", "url": "https://www.youtube.com/watch?v=HrQXgMGwcwk", "duration": "12m", "durationMins": 12, "ytId": "HrQXgMGwcwk", "status": "[ ] Pending"}, {"id": 118, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || Administrative Distance", "url": "https://www.youtube.com/watch?v=O4qAQ2kngTI", "duration": "5m", "durationMins": 5, "ytId": "O4qAQ2kngTI", "status": "[ ] Pending"}, {"id": 119, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || OSPF Metric", "url": "https://www.youtube.com/watch?v=X_zIGaPevAc", "duration": "4m", "durationMins": 4, "ytId": "X_zIGaPevAc", "status": "[ ] Pending"}]}, {"calendar_day": 17, "day_label": "Day 17", "date": "Nov 03, 2026", "is_rest_day": false, "study_day_num": 15, "section_code": "3.0", "section_name": "3.0 IP Connectivity", "section_ar": "التوجيه والاتصال الشبكي", "section_color": "emerald", "sec_day_index": 3, "sec_total_days": 5, "videos": [{"id": 120, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || OSPF LSAs", "url": "https://www.youtube.com/watch?v=bgYaFbbpotQ", "duration": "4m", "durationMins": 4, "ytId": "bgYaFbbpotQ", "status": "[ ] Pending"}, {"id": 121, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || OSPF Neighbor Adjacency", "url": "https://www.youtube.com/watch?v=w2ffesKzrJ8", "duration": "12m", "durationMins": 12, "ytId": "w2ffesKzrJ8", "status": "[ ] Pending"}, {"id": 122, "day": "Day 14", "date": "Oct 31, 2026", "title": "CCNA 200-301 || Basic OSPF Configuration", "url": "https://www.youtube.com/watch?v=EML6rvnbSFE", "duration": "11m", "durationMins": 11, "ytId": "EML6rvnbSFE", "status": "[ ] Pending"}, {"id": 123, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Area Design", "url": "https://www.youtube.com/watch?v=YIyYq5EkbQ0", "duration": "10m", "durationMins": 10, "ytId": "YIyYq5EkbQ0", "status": "[ ] Pending"}, {"id": 124, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Network Advertisement", "url": "https://www.youtube.com/watch?v=sVA1z3mO90o", "duration": "16m", "durationMins": 16, "ytId": "sVA1z3mO90o", "status": "[ ] Pending"}, {"id": 125, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Advertising Methods", "url": "https://www.youtube.com/watch?v=LbWFYdpcMcc", "duration": "17m", "durationMins": 17, "ytId": "LbWFYdpcMcc", "status": "[ ] Pending"}, {"id": 126, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Load Balance", "url": "https://www.youtube.com/watch?v=cnd4pZEsAFI", "duration": "7m", "durationMins": 7, "ytId": "cnd4pZEsAFI", "status": "[ ] Pending"}, {"id": 127, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Hidden Routes", "url": "https://www.youtube.com/watch?v=0EXbb8egWmY", "duration": "8m", "durationMins": 8, "ytId": "0EXbb8egWmY", "status": "[ ] Pending"}, {"id": 128, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Cost", "url": "https://www.youtube.com/watch?v=7zxakM3Hwyw", "duration": "8m", "durationMins": 8, "ytId": "7zxakM3Hwyw", "status": "[ ] Pending"}]}, {"calendar_day": 18, "day_label": "Day 18", "date": "Nov 04, 2026", "is_rest_day": false, "study_day_num": 16, "section_code": "3.0", "section_name": "3.0 IP Connectivity", "section_ar": "التوجيه والاتصال الشبكي", "section_color": "emerald", "sec_day_index": 4, "sec_total_days": 5, "videos": [{"id": 129, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF ECMP", "url": "https://www.youtube.com/watch?v=LMWUvyAJxHE", "duration": "5m", "durationMins": 5, "ytId": "LMWUvyAJxHE", "status": "[ ] Pending"}, {"id": 130, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Advertised Cost", "url": "https://www.youtube.com/watch?v=x0wfB8BI_Xc", "duration": "6m", "durationMins": 6, "ytId": "x0wfB8BI_Xc", "status": "[ ] Pending"}, {"id": 131, "day": "Day 15", "date": "Nov 1, 2026", "title": "CCNA 200-301 || OSPF Designated Router", "url": "https://www.youtube.com/watch?v=7P0op0dV1z8", "duration": "9m", "durationMins": 9, "ytId": "7P0op0dV1z8", "status": "[ ] Pending"}, {"id": 132, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || OSPF Type-2 LSA", "url": "https://www.youtube.com/watch?v=_IUS5jGkw0c", "duration": "7m", "durationMins": 7, "ytId": "_IUS5jGkw0c", "status": "[ ] Pending"}, {"id": 133, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || Floating Static Route", "url": "https://www.youtube.com/watch?v=4M7ybYDnU00", "duration": "12m", "durationMins": 12, "ytId": "4M7ybYDnU00", "status": "[ ] Pending"}, {"id": 134, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || IPv6 Static Route", "url": "https://www.youtube.com/watch?v=92sODdw5vw8", "duration": "15m", "durationMins": 15, "ytId": "92sODdw5vw8", "status": "[ ] Pending"}, {"id": 135, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || IPv6 Routing Protocols", "url": "https://www.youtube.com/watch?v=fsC8HeIwUYA", "duration": "4m", "durationMins": 4, "ytId": "fsC8HeIwUYA", "status": "[ ] Pending"}, {"id": 136, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || Route Matching", "url": "https://www.youtube.com/watch?v=WKUVWT7l20E", "duration": "7m", "durationMins": 7, "ytId": "WKUVWT7l20E", "status": "[ ] Pending"}]}, {"calendar_day": 19, "day_label": "Day 19", "date": "Nov 05, 2026", "is_rest_day": false, "study_day_num": 17, "section_code": "3.0", "section_name": "3.0 IP Connectivity", "section_ar": "التوجيه والاتصال الشبكي", "section_color": "emerald", "sec_day_index": 5, "sec_total_days": 5, "videos": [{"id": 137, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || EIGRP Overview", "url": "https://www.youtube.com/watch?v=SkiTdz1XeLU", "duration": "6m", "durationMins": 6, "ytId": "SkiTdz1XeLU", "status": "[ ] Pending"}, {"id": 138, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || EIGRP Distance Formula", "url": "https://www.youtube.com/watch?v=XF64Xu4BFAM", "duration": "12m", "durationMins": 12, "ytId": "XF64Xu4BFAM", "status": "[ ] Pending"}, {"id": 139, "day": "Day 16", "date": "Nov 2, 2026", "title": "CCNA 200-301 || EIGRP Feasibility Condition", "url": "https://www.youtube.com/watch?v=YapROX-A69s", "duration": "15m", "durationMins": 15, "ytId": "YapROX-A69s", "status": "[ ] Pending"}, {"id": 140, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || First Hop Redundancy Protocol", "url": "https://www.youtube.com/watch?v=fQZcAZtJk08", "duration": "16m", "durationMins": 16, "ytId": "fQZcAZtJk08", "status": "[ ] Pending"}, {"id": 141, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || Basic HSRP Implementation", "url": "https://www.youtube.com/watch?v=VkGvT6hBxrU", "duration": "14m", "durationMins": 14, "ytId": "VkGvT6hBxrU", "status": "[ ] Pending"}, {"id": 142, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || Advanced HSRP & Load Balancing", "url": "https://www.youtube.com/watch?v=hNy2hd1vELs", "duration": "12m", "durationMins": 12, "ytId": "hNy2hd1vELs", "status": "[ ] Pending"}, {"id": 143, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || Virtual Routing and Forwarding", "url": "https://www.youtube.com/watch?v=MvHC8BFUs8k", "duration": "10m", "durationMins": 10, "ytId": "MvHC8BFUs8k", "status": "[ ] Pending"}, {"id": 144, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || Module-3 Review || مراجعة الفصل الثالث", "url": "https://www.youtube.com/watch?v=S32qlFO-yy8", "duration": "13m", "durationMins": 13, "ytId": "S32qlFO-yy8", "status": "[ ] Pending"}]}, {"calendar_day": 20, "day_label": "Day 20", "date": "Nov 06, 2026", "is_rest_day": false, "study_day_num": 18, "section_code": "4.0", "section_name": "4.0 IP Services", "section_ar": "خدمات بروتوكول الإنترنت", "section_color": "amber", "sec_day_index": 1, "sec_total_days": 4, "videos": [{"id": 145, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || Module-4 || IP Services", "url": "https://www.youtube.com/watch?v=V8P2nigpELc", "duration": "2m", "durationMins": 2, "ytId": "V8P2nigpELc", "status": "[ ] Pending"}, {"id": 146, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || Network Address Translation", "url": "https://www.youtube.com/watch?v=JsLrHcA-iHM", "duration": "14m", "durationMins": 14, "ytId": "JsLrHcA-iHM", "status": "[ ] Pending"}, {"id": 147, "day": "Day 17", "date": "Nov 3, 2026", "title": "CCNA 200-301 || Network Address Translation Quiz || عينة من اختبارات الفصل", "url": "https://www.youtube.com/watch?v=MIbuntQHL34", "duration": "3m", "durationMins": 3, "ytId": "MIbuntQHL34", "status": "[ ] Pending"}, {"id": 148, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || 1:1 Static NAT", "url": "https://www.youtube.com/watch?v=6QM6sGtXYYQ", "duration": "12m", "durationMins": 12, "ytId": "6QM6sGtXYYQ", "status": "[ ] Pending"}, {"id": 149, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || Many-to-One Static NAT", "url": "https://www.youtube.com/watch?v=EdJovzEvaTM", "duration": "14m", "durationMins": 14, "ytId": "EdJovzEvaTM", "status": "[ ] Pending"}, {"id": 150, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || The PAT Theory", "url": "https://www.youtube.com/watch?v=4aE4SmqYYh8", "duration": "6m", "durationMins": 6, "ytId": "4aE4SmqYYh8", "status": "[ ] Pending"}, {"id": 151, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || NAT Review", "url": "https://www.youtube.com/watch?v=vy0w-Y6rsuU", "duration": "5m", "durationMins": 5, "ytId": "vy0w-Y6rsuU", "status": "[ ] Pending"}]}, {"calendar_day": 21, "day_label": "Day 21", "date": "Nov 07, 2026", "is_rest_day": true, "title": "يوم راحة ومراجعة أسبوعي (Week 3 Rest & Review)", "videos": []}, {"calendar_day": 22, "day_label": "Day 22", "date": "Nov 08, 2026", "is_rest_day": false, "study_day_num": 19, "section_code": "4.0", "section_name": "4.0 IP Services", "section_ar": "خدمات بروتوكول الإنترنت", "section_color": "amber", "sec_day_index": 2, "sec_total_days": 4, "videos": [{"id": 152, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || Network Time Protocol", "url": "https://www.youtube.com/watch?v=LDkVYaaEZVg", "duration": "15m", "durationMins": 15, "ytId": "LDkVYaaEZVg", "status": "[ ] Pending"}, {"id": 153, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || DHCP Concepts", "url": "https://www.youtube.com/watch?v=udU5HiIAZLk", "duration": "13m", "durationMins": 13, "ytId": "udU5HiIAZLk", "status": "[ ] Pending"}, {"id": 154, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || DHCP Pool for VLAN 10", "url": "https://www.youtube.com/watch?v=gmyN6mrEpks", "duration": "11m", "durationMins": 11, "ytId": "gmyN6mrEpks", "status": "[ ] Pending"}, {"id": 155, "day": "Day 18", "date": "Nov 4, 2026", "title": "CCNA 200-301 || Domain Name Server", "url": "https://www.youtube.com/watch?v=_7CZXTMsvGk", "duration": "6m", "durationMins": 6, "ytId": "_7CZXTMsvGk", "status": "[ ] Pending"}, {"id": 156, "day": "Day 19", "date": "Nov 5, 2026", "title": "CCNA 200-301 || DNS Practices", "url": "https://www.youtube.com/watch?v=9BZmbFeFDK4", "duration": "13m", "durationMins": 13, "ytId": "9BZmbFeFDK4", "status": "[ ] Pending"}, {"id": 157, "day": "Day 19", "date": "Nov 5, 2026", "title": "CCNA 200-301 || SNMP for Configuration/Monitoring", "url": "https://www.youtube.com/watch?v=kFkxdfNVbDM", "duration": "12m", "durationMins": 12, "ytId": "kFkxdfNVbDM", "status": "[ ] Pending"}]}, {"calendar_day": 23, "day_label": "Day 23", "date": "Nov 09, 2026", "is_rest_day": false, "study_day_num": 20, "section_code": "4.0", "section_name": "4.0 IP Services", "section_ar": "خدمات بروتوكول الإنترنت", "section_color": "amber", "sec_day_index": 3, "sec_total_days": 4, "videos": [{"id": 158, "day": "Day 19", "date": "Nov 5, 2026", "title": "CCNA 200-301 || System Loggings", "url": "https://www.youtube.com/watch?v=_a1l5w2king", "duration": "11m", "durationMins": 11, "ytId": "_a1l5w2king", "status": "[ ] Pending"}, {"id": 159, "day": "Day 19", "date": "Nov 5, 2026", "title": "CCNA 200-301 || SNMP & Syslog Servers", "url": "https://www.youtube.com/watch?v=CpaaD4BO-k8", "duration": "7m", "durationMins": 7, "ytId": "CpaaD4BO-k8", "status": "[ ] Pending"}, {"id": 160, "day": "Day 19", "date": "Nov 5, 2026", "title": "CCNA 200-301 || DHCP Relay", "url": "https://www.youtube.com/watch?v=1AYMyzXEwdQ", "duration": "9m", "durationMins": 9, "ytId": "1AYMyzXEwdQ", "status": "[ ] Pending"}, {"id": 161, "day": "Day 19", "date": "Nov 5, 2026", "title": "CCNA 200-301 || Onboarding Branch 1", "url": "https://www.youtube.com/watch?v=c6-Kn0O0Niw", "duration": "11m", "durationMins": 11, "ytId": "c6-Kn0O0Niw", "status": "[ ] Pending"}, {"id": 162, "day": "Day 19", "date": "Nov 5, 2026", "title": "CCNA 200-301 || Troubleshooting Branches Connectivity", "url": "https://www.youtube.com/watch?v=rbj1Vwtrvfg", "duration": "15m", "durationMins": 15, "ytId": "rbj1Vwtrvfg", "status": "[ ] Pending"}, {"id": 163, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Forwarding Branch 1", "url": "https://www.youtube.com/watch?v=wIggFg9tSCM", "duration": "11m", "durationMins": 11, "ytId": "wIggFg9tSCM", "status": "[ ] Pending"}]}, {"calendar_day": 24, "day_label": "Day 24", "date": "Nov 10, 2026", "is_rest_day": false, "study_day_num": 21, "section_code": "4.0", "section_name": "4.0 IP Services", "section_ar": "خدمات بروتوكول الإنترنت", "section_color": "amber", "sec_day_index": 4, "sec_total_days": 4, "videos": [{"id": 164, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Quality of Service", "url": "https://www.youtube.com/watch?v=sq57iLNMEvc", "duration": "8m", "durationMins": 8, "ytId": "sq57iLNMEvc", "status": "[ ] Pending"}, {"id": 165, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || QoS Components", "url": "https://www.youtube.com/watch?v=k2EB6N9Qnb0", "duration": "11m", "durationMins": 11, "ytId": "k2EB6N9Qnb0", "status": "[ ] Pending"}, {"id": 166, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || QoS Deployment", "url": "https://www.youtube.com/watch?v=NzftMWHuV30", "duration": "4m", "durationMins": 4, "ytId": "NzftMWHuV30", "status": "[ ] Pending"}, {"id": 167, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Secure SHell", "url": "https://www.youtube.com/watch?v=LuaP7szsYzo", "duration": "14m", "durationMins": 14, "ytId": "LuaP7szsYzo", "status": "[ ] Pending"}, {"id": 168, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Data Transfer Protocols", "url": "https://www.youtube.com/watch?v=1NAQzZW_t0w", "duration": "10m", "durationMins": 10, "ytId": "1NAQzZW_t0w", "status": "[ ] Pending"}, {"id": 169, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Module-4 Review || مراجعة الفصل الرابع", "url": "https://www.youtube.com/watch?v=FDmFDy7JekQ", "duration": "10m", "durationMins": 10, "ytId": "FDmFDy7JekQ", "status": "[ ] Pending"}]}, {"calendar_day": 25, "day_label": "Day 25", "date": "Nov 11, 2026", "is_rest_day": false, "study_day_num": 22, "section_code": "5.0", "section_name": "5.0 Security Fundamentals", "section_ar": "أساسيات أمن الشبكات", "section_color": "rose", "sec_day_index": 1, "sec_total_days": 3, "videos": [{"id": 170, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Module-5 || Security Fundamentals", "url": "https://www.youtube.com/watch?v=AXl390ZYSic", "duration": "2m", "durationMins": 2, "ytId": "AXl390ZYSic", "status": "[ ] Pending"}, {"id": 171, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Security Concepts", "url": "https://www.youtube.com/watch?v=XVjs0ZoKwuo", "duration": "9m", "durationMins": 9, "ytId": "XVjs0ZoKwuo", "status": "[ ] Pending"}, {"id": 172, "day": "Day 20", "date": "Nov 6, 2026", "title": "CCNA 200-301 || Security Concepts Quiz || عينة من اختبارات الفصل", "url": "https://www.youtube.com/watch?v=Ld7-_tCt9Ig", "duration": "5m", "durationMins": 5, "ytId": "Ld7-_tCt9Ig", "status": "[ ] Pending"}, {"id": 173, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || Security Technical Mitigation", "url": "https://www.youtube.com/watch?v=jQ7hUtwWV5Y", "duration": "8m", "durationMins": 8, "ytId": "jQ7hUtwWV5Y", "status": "[ ] Pending"}, {"id": 174, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || Administrative/Physical Mitigation", "url": "https://www.youtube.com/watch?v=un41f-tcMi0", "duration": "13m", "durationMins": 13, "ytId": "un41f-tcMi0", "status": "[ ] Pending"}, {"id": 175, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || Lines Protection by Password", "url": "https://www.youtube.com/watch?v=0QLpWNL_veI", "duration": "7m", "durationMins": 7, "ytId": "0QLpWNL_veI", "status": "[ ] Pending"}, {"id": 176, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || Lines Protection by Secret", "url": "https://www.youtube.com/watch?v=ay1WkEVMBkw", "duration": "12m", "durationMins": 12, "ytId": "ay1WkEVMBkw", "status": "[ ] Pending"}, {"id": 177, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || Lines Protection by Credentials", "url": "https://www.youtube.com/watch?v=IWHJFc0L194", "duration": "9m", "durationMins": 9, "ytId": "IWHJFc0L194", "status": "[ ] Pending"}, {"id": 178, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || IPSec Theory - S2S VPN", "url": "https://www.youtube.com/watch?v=8JZGtjXVYkI", "duration": "14m", "durationMins": 14, "ytId": "8JZGtjXVYkI", "status": "[ ] Pending"}, {"id": 179, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || Access Control Lists", "url": "https://www.youtube.com/watch?v=LyVBtdUuSJ8", "duration": "12m", "durationMins": 12, "ytId": "LyVBtdUuSJ8", "status": "[ ] Pending"}]}, {"calendar_day": 26, "day_label": "Day 26", "date": "Nov 12, 2026", "is_rest_day": false, "study_day_num": 23, "section_code": "5.0", "section_name": "5.0 Security Fundamentals", "section_ar": "أساسيات أمن الشبكات", "section_color": "rose", "sec_day_index": 2, "sec_total_days": 3, "videos": [{"id": 180, "day": "Day 21", "date": "Nov 7, 2026", "title": "CCNA 200-301 || ACL Deployment", "url": "https://www.youtube.com/watch?v=IcmXxy04oZ0", "duration": "5m", "durationMins": 5, "ytId": "IcmXxy04oZ0", "status": "[ ] Pending"}, {"id": 181, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Standard ACL", "url": "https://www.youtube.com/watch?v=VrDjCUO-Cxc", "duration": "11m", "durationMins": 11, "ytId": "VrDjCUO-Cxc", "status": "[ ] Pending"}, {"id": 182, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Implicit Deny", "url": "https://www.youtube.com/watch?v=hOTJo1vwIpY", "duration": "7m", "durationMins": 7, "ytId": "hOTJo1vwIpY", "status": "[ ] Pending"}, {"id": 183, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Extended ACL", "url": "https://www.youtube.com/watch?v=xO9viKMJ9D0", "duration": "7m", "durationMins": 7, "ytId": "xO9viKMJ9D0", "status": "[ ] Pending"}, {"id": 184, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Named ACL", "url": "https://www.youtube.com/watch?v=QeIW_0I6J1Y", "duration": "5m", "durationMins": 5, "ytId": "QeIW_0I6J1Y", "status": "[ ] Pending"}, {"id": 185, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Permit ICMP/SSH", "url": "https://www.youtube.com/watch?v=pjvuAd00Tdg", "duration": "21m", "durationMins": 21, "ytId": "pjvuAd00Tdg", "status": "[ ] Pending"}, {"id": 186, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Permit HTTP Only", "url": "https://www.youtube.com/watch?v=iUB9SpBaRWI", "duration": "11m", "durationMins": 11, "ytId": "iUB9SpBaRWI", "status": "[ ] Pending"}, {"id": 187, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Port Security", "url": "https://www.youtube.com/watch?v=RnISqOjxreg", "duration": "7m", "durationMins": 7, "ytId": "RnISqOjxreg", "status": "[ ] Pending"}, {"id": 188, "day": "Day 22", "date": "Nov 8, 2026", "title": "CCNA 200-301 || Max. MAC Addresses", "url": "https://www.youtube.com/watch?v=tQeFxxY-XYQ", "duration": "15m", "durationMins": 15, "ytId": "tQeFxxY-XYQ", "status": "[ ] Pending"}, {"id": 189, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Static MAC Address", "url": "https://www.youtube.com/watch?v=805uYGVz1gY", "duration": "9m", "durationMins": 9, "ytId": "805uYGVz1gY", "status": "[ ] Pending"}]}, {"calendar_day": 27, "day_label": "Day 27", "date": "Nov 13, 2026", "is_rest_day": false, "study_day_num": 24, "section_code": "5.0", "section_name": "5.0 Security Fundamentals", "section_ar": "أساسيات أمن الشبكات", "section_color": "rose", "sec_day_index": 3, "sec_total_days": 3, "videos": [{"id": 190, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || DHCP Snooping", "url": "https://www.youtube.com/watch?v=WjaTm3siyS4", "duration": "11m", "durationMins": 11, "ytId": "WjaTm3siyS4", "status": "[ ] Pending"}, {"id": 191, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Dynamic ARP Inspection", "url": "https://www.youtube.com/watch?v=nLscoT7xOgE", "duration": "10m", "durationMins": 10, "ytId": "nLscoT7xOgE", "status": "[ ] Pending"}, {"id": 192, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || AAA Concept", "url": "https://www.youtube.com/watch?v=bVPyq0GEqHA", "duration": "4m", "durationMins": 4, "ytId": "bVPyq0GEqHA", "status": "[ ] Pending"}, {"id": 193, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || AAA Deployment", "url": "https://www.youtube.com/watch?v=-WiYQujIoHM", "duration": "9m", "durationMins": 9, "ytId": "-WiYQujIoHM", "status": "[ ] Pending"}, {"id": 194, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Wi-Fi Security", "url": "https://www.youtube.com/watch?v=d_XVdNxzAO0", "duration": "9m", "durationMins": 9, "ytId": "d_XVdNxzAO0", "status": "[ ] Pending"}, {"id": 195, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Wi-Fi Security Protocols", "url": "https://www.youtube.com/watch?v=IGN3dsbLoC8", "duration": "4m", "durationMins": 4, "ytId": "IGN3dsbLoC8", "status": "[ ] Pending"}, {"id": 196, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Wireless Encryption", "url": "https://www.youtube.com/watch?v=4QIsksn672A", "duration": "4m", "durationMins": 4, "ytId": "4QIsksn672A", "status": "[ ] Pending"}, {"id": 197, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Wi-Fi Protected Access", "url": "https://www.youtube.com/watch?v=8n4z0RVTaiM", "duration": "8m", "durationMins": 8, "ytId": "8n4z0RVTaiM", "status": "[ ] Pending"}, {"id": 198, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Dot1X Deployment", "url": "https://www.youtube.com/watch?v=u3z6I7Tttxw", "duration": "6m", "durationMins": 6, "ytId": "u3z6I7Tttxw", "status": "[ ] Pending"}, {"id": 199, "day": "Day 23", "date": "Nov 9, 2026", "title": "CCNA 200-301 || Module-5 Review || مراجعة الفصل الخامس", "url": "https://www.youtube.com/watch?v=IAgHAvS_ORM", "duration": "6m", "durationMins": 6, "ytId": "IAgHAvS_ORM", "status": "[ ] Pending"}]}, {"calendar_day": 28, "day_label": "Day 28", "date": "Nov 14, 2026", "is_rest_day": true, "title": "يوم راحة ومراجعة أسبوعي (Week 4 Rest & Review)", "videos": []}, {"calendar_day": 29, "day_label": "Day 29", "date": "Nov 15, 2026", "is_rest_day": false, "study_day_num": 25, "section_code": "6.0", "section_name": "6.0 Automation and Programmability", "section_ar": "الأتمتة والبرمجة الشبكية", "section_color": "purple", "sec_day_index": 1, "sec_total_days": 2, "videos": [{"id": 200, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || Module-6 || Automation & Programmability", "url": "https://www.youtube.com/watch?v=B8lWqooLgu4", "duration": "3m", "durationMins": 3, "ytId": "B8lWqooLgu4", "status": "[ ] Pending"}, {"id": 201, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || The Automation Impact", "url": "https://www.youtube.com/watch?v=3Q3phXtHGGQ", "duration": "11m", "durationMins": 11, "ytId": "3Q3phXtHGGQ", "status": "[ ] Pending"}, {"id": 202, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || The Automation Impact Quiz || عينة من اختبارات الفصل", "url": "https://www.youtube.com/watch?v=5SE2yHJtl4w", "duration": "5m", "durationMins": 5, "ytId": "5SE2yHJtl4w", "status": "[ ] Pending"}, {"id": 203, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || Traditional vs IBN Networks", "url": "https://www.youtube.com/watch?v=X__BDL7N9H8", "duration": "10m", "durationMins": 10, "ytId": "X__BDL7N9H8", "status": "[ ] Pending"}, {"id": 204, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || Network Planes", "url": "https://www.youtube.com/watch?v=dnnL4aqBo1U", "duration": "11m", "durationMins": 11, "ytId": "dnnL4aqBo1U", "status": "[ ] Pending"}, {"id": 205, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || What is SDN?", "url": "https://www.youtube.com/watch?v=R46XK0wcSbE", "duration": "8m", "durationMins": 8, "ytId": "R46XK0wcSbE", "status": "[ ] Pending"}, {"id": 206, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || SDN Approaches", "url": "https://www.youtube.com/watch?v=KbD9S56rLY4", "duration": "4m", "durationMins": 4, "ytId": "KbD9S56rLY4", "status": "[ ] Pending"}, {"id": 207, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || Application Programming Interfaces", "url": "https://www.youtube.com/watch?v=khm0t70Xfno", "duration": "9m", "durationMins": 9, "ytId": "khm0t70Xfno", "status": "[ ] Pending"}, {"id": 208, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || API Types per Region", "url": "https://www.youtube.com/watch?v=4ZtlqTU_8nE", "duration": "7m", "durationMins": 7, "ytId": "4ZtlqTU_8nE", "status": "[ ] Pending"}, {"id": 209, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || Encoding Languages", "url": "https://www.youtube.com/watch?v=HyTKZGdlEjQ", "duration": "5m", "durationMins": 5, "ytId": "HyTKZGdlEjQ", "status": "[ ] Pending"}, {"id": 210, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || HTTP Response", "url": "https://www.youtube.com/watch?v=Te37zWMM4Hk", "duration": "4m", "durationMins": 4, "ytId": "Te37zWMM4Hk", "status": "[ ] Pending"}]}, {"calendar_day": 30, "day_label": "Day 30", "date": "Nov 16, 2026", "is_rest_day": false, "study_day_num": 26, "section_code": "6.0", "section_name": "6.0 Automation and Programmability", "section_ar": "الأتمتة والبرمجة الشبكية", "section_color": "purple", "sec_day_index": 2, "sec_total_days": 2, "videos": [{"id": 211, "day": "Day 24", "date": "Nov 10, 2026", "title": "CCNA 200-301 || REST-API Security", "url": "https://www.youtube.com/watch?v=zMgkGFruMW4", "duration": "3m", "durationMins": 3, "ytId": "zMgkGFruMW4", "status": "[ ] Pending"}, {"id": 212, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || XML/JSON Format", "url": "https://www.youtube.com/watch?v=9gyLkL6NQbg", "duration": "13m", "durationMins": 13, "ytId": "9gyLkL6NQbg", "status": "[ ] Pending"}, {"id": 213, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || Artificial Intelligence", "url": "https://www.youtube.com/watch?v=9yjeBbhRKog", "duration": "8m", "durationMins": 8, "ytId": "9yjeBbhRKog", "status": "[ ] Pending"}, {"id": 214, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || AI Examples", "url": "https://www.youtube.com/watch?v=l0Elfl6PyuA", "duration": "6m", "durationMins": 6, "ytId": "l0Elfl6PyuA", "status": "[ ] Pending"}, {"id": 215, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || Generative AI", "url": "https://www.youtube.com/watch?v=GrKlBJ4TXl0", "duration": "12m", "durationMins": 12, "ytId": "GrKlBJ4TXl0", "status": "[ ] Pending"}, {"id": 216, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || Predictive AI", "url": "https://www.youtube.com/watch?v=FJ8MnPWSHTY", "duration": "2m", "durationMins": 2, "ytId": "FJ8MnPWSHTY", "status": "[ ] Pending"}, {"id": 217, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || Machine Learning", "url": "https://www.youtube.com/watch?v=E_08NBcxRkY", "duration": "3m", "durationMins": 3, "ytId": "E_08NBcxRkY", "status": "[ ] Pending"}, {"id": 218, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || NCT - Ansible", "url": "https://www.youtube.com/watch?v=2ZvfDgma9ZI", "duration": "8m", "durationMins": 8, "ytId": "2ZvfDgma9ZI", "status": "[ ] Pending"}, {"id": 219, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || NCT - Terraform", "url": "https://www.youtube.com/watch?v=MUUdVzEAk5Y", "duration": "5m", "durationMins": 5, "ytId": "MUUdVzEAk5Y", "status": "[ ] Pending"}, {"id": 220, "day": "Day 25", "date": "Nov 11, 2026", "title": "CCNA 200-301 || Module-6 Review || مراجعة الفصل السادس", "url": "https://www.youtube.com/watch?v=IsJobm0jhnY", "duration": "5m", "durationMins": 5, "ytId": "IsJobm0jhnY", "status": "[ ] Pending"}, {"id": 221, "day": "Day 25", "date": "Nov 11, 2026", "title": "كيف تبدو الأسئلة العملية في إمتحان Cisco CCNA؟ || نريد مثالاً", "url": "https://www.youtube.com/watch?v=IpRh5lwUTFg", "duration": "12m", "durationMins": 12, "ytId": "IpRh5lwUTFg", "status": "[ ] Pending"}]}];
+
+    // Flatten all videos for quick lookup
+    const ALL_VIDEOS = [];
+    CALENDAR_DATA.forEach(d => {
+      if (!d.is_rest_day && d.videos) {
+        d.videos.forEach(v => {
+          ALL_VIDEOS.push({
+            ...v,
+            calendar_day: d.calendar_day,
+            day_label: d.day_label,
+            date: d.date,
+            section_code: d.section_code,
+            section_name: d.section_name,
+            section_ar: d.section_ar,
+            section_color: d.section_color
+          });
+        });
+      }
+    });
+
+    // 6 Sections Definition
+    const SECTIONS_META = [
+      { code: "1.0", name: "1.0 Network Fundamentals", ar: "أساسيات الشبكات", color: "sky", days: "Day 1 - Day 8 (8 أيام)", total_videos: 68 },
+      { code: "2.0", name: "2.0 Network Access", ar: "الوصول إلى الشبكة والبنية", color: "indigo", days: "Day 9 - Day 12 (4 أيام)", total_videos: 33 },
+      { code: "3.0", name: "3.0 IP Connectivity", ar: "التوجيه والاتصال الشبكي", color: "emerald", days: "Day 13 - Day 18 (5 أيام)", total_videos: 43 },
+      { code: "4.0", name: "4.0 IP Services", ar: "خدمات بروتوكول الإنترنت", color: "amber", days: "Day 19 - Day 22 (4 أيام)", total_videos: 25 },
+      { code: "5.0", name: "5.0 Security Fundamentals", ar: "أساسيات أمن الشبكات", color: "rose", days: "Day 23 - Day 26 (3 أيام)", total_videos: 30 },
+      { code: "6.0", name: "6.0 Automation and Programmability", ar: "الأتمتة والبرمجة الشبكية", color: "purple", days: "Day 27 - Day 30 (2 أيام)", total_videos: 22 }
+    ];
+
+    let completedSet = new Set();
+    let notesMap = {};
+    let collapsedDays = new Set();
+    let currentFilter = 'all'; // 'all', 'pending', 'completed'
+    let selectedDayFilter = null; // null or calendar_day number
+    let selectedSectionFilter = null; // null or "1.0", "2.0"...
+    let searchQuery = '';
+    let activeModalVideoId = null;
+
+    const STORAGE_KEY_COMPLETED = 'ccna_30days_completed_ids_v1';
+    const STORAGE_KEY_NOTES = 'ccna_30days_notes_v1';
+    const STORAGE_KEY_THEME = 'ccna_30days_theme_v1';
+
+    function initApp() {
+      loadState();
+      applyTheme();
+      renderSectionCards();
+      renderDayPills();
+      render();
+      updateStats();
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_COMPLETED);
+        if (saved) {
+          completedSet = new Set(JSON.parse(saved));
+        }
+        const savedNotes = localStorage.getItem(STORAGE_KEY_NOTES);
+        if (savedNotes) {
+          notesMap = JSON.parse(savedNotes);
+        }
+      } catch (e) {
+        console.error('Error loading state:', e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY_COMPLETED, JSON.stringify(Array.from(completedSet)));
+        localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(notesMap));
+      } catch (e) {
+        console.error('Error saving state:', e);
+      }
+    }
+
+    function toggleVideo(id, event) {
+      if (event) event.stopPropagation();
+      const wasCompleted = completedSet.has(id);
+      
+      if (wasCompleted) {
+        completedSet.delete(id);
+      } else {
+        completedSet.add(id);
+      }
+      
+      saveState();
+      updateStats();
+      render();
+
+      const video = ALL_VIDEOS.find(v => v.id === id);
+      if (!wasCompleted && video) {
+        checkDayAndSectionCompletion(video);
+      }
+    }
+
+    function checkDayAndSectionCompletion(video) {
+      // Check day completion
+      const dayData = CALENDAR_DATA.find(d => d.calendar_day === video.calendar_day);
+      if (dayData && !dayData.is_rest_day) {
+        const allDayDone = dayData.videos.every(v => completedSet.has(v.id));
+        if (allDayDone) triggerConfetti(false);
+      }
+
+      // Check section completion
+      const secVideos = ALL_VIDEOS.filter(v => v.section_code === video.section_code);
+      const allSecDone = secVideos.every(v => completedSet.has(v.id));
+      if (allSecDone && secVideos.length > 0) {
+        triggerConfetti(false);
+      }
+
+      if (completedSet.size === ALL_VIDEOS.length) {
+        triggerConfetti(true);
+      }
+    }
+
+    function toggleDayAll(calDayNum, event) {
+      if (event) event.stopPropagation();
+      const dayData = CALENDAR_DATA.find(d => d.calendar_day === calDayNum);
+      if (!dayData || dayData.is_rest_day) return;
+
+      const allDone = dayData.videos.every(v => completedSet.has(v.id));
+
+      if (allDone) {
+        dayData.videos.forEach(v => completedSet.delete(v.id));
+      } else {
+        dayData.videos.forEach(v => completedSet.add(v.id));
+        triggerConfetti(false);
+      }
+
+      saveState();
+      updateStats();
+      render();
+    }
+
+    function toggleSectionAll(secCode, event) {
+      if (event) event.stopPropagation();
+      const secVideos = ALL_VIDEOS.filter(v => v.section_code === secCode);
+      const allDone = secVideos.every(v => completedSet.has(v.id));
+
+      if (allDone) {
+        secVideos.forEach(v => completedSet.delete(v.id));
+      } else {
+        secVideos.forEach(v => completedSet.add(v.id));
+        triggerConfetti(false);
+      }
+
+      saveState();
+      updateStats();
+      render();
+    }
+
+    function triggerConfetti(massive = false) {
+      if (typeof confetti === 'function') {
+        if (massive) {
+          const end = Date.now() + 3 * 1000;
+          const colors = ['#0ea5e9', '#6366f1', '#10b981', '#f59e0b', '#ec4899'];
+          (function frame() {
+            confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+            confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+            if (Date.now() < end) requestAnimationFrame(frame);
+          }());
+        } else {
+          confetti({ particleCount: 75, spread: 65, origin: { y: 0.7 } });
+        }
+      }
+    }
+
+    function renderSectionCards() {
+      const container = document.getElementById('sectionsCardsGrid');
+      let html = '';
+
+      SECTIONS_META.forEach(sec => {
+        const secVideos = ALL_VIDEOS.filter(v => v.section_code === sec.code);
+        const done = secVideos.filter(v => completedSet.has(v.id)).length;
+        const total = secVideos.length;
+        const pct = Math.round((done / total) * 100);
+        const isComplete = done === total && total > 0;
+        const isSelected = selectedSectionFilter === sec.code;
+
+        let colorBorder = 'border-slate-800';
+        let colorBg = 'bg-slate-950/70 hover:border-sky-500/50';
+        if (isSelected) {
+          colorBg = 'bg-slate-900 border-sky-400 ring-2 ring-sky-400/50 shadow-lg';
+        } else if (isComplete) {
+          colorBg = 'bg-emerald-950/40 border-emerald-500/40';
+        }
+
+        html += `
+          <div onclick="filterBySection('${sec.code}')" class="p-4 rounded-2xl border ${colorBg} cursor-pointer transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-slate-800 text-sky-400 font-num">${sec.code}</span>
+                <span class="text-[11px] text-slate-400 font-num">${sec.days}</span>
+              </div>
+              <h3 class="text-sm font-bold text-white">${sec.name}</h3>
+              <p class="text-xs text-slate-400 mt-0.5">${sec.ar}</p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-800/80">
+              <div class="flex items-center justify-between text-xs font-num mb-1.5">
+                <span class="text-slate-400">${done}/${total} مقطع</span>
+                <span class="font-bold ${isComplete ? 'text-emerald-400' : 'text-sky-400'}">${pct}%</span>
+              </div>
+              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-sky-500 to-emerald-400 transition-all duration-300" style="width: ${pct}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderDayPills() {
+      const container = document.getElementById('dayPillsContainer');
+      let html = `
+        <button onclick="filterByDay(null)" class="day-pill px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition ${selectedDayFilter === null ? 'bg-cisco-600 text-white shadow' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}">
+          جميع الأيام (30)
+        </button>
+      `;
+
+      CALENDAR_DATA.forEach(d => {
+        const isSelected = selectedDayFilter === d.calendar_day;
+        if (d.is_rest_day) {
+          html += `
+            <button onclick="filterByDay(${d.calendar_day})" class="day-pill px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition flex items-center gap-1.5 ${isSelected ? 'bg-amber-600 text-white ring-2 ring-amber-400' : 'bg-amber-950/60 border border-amber-600/30 text-amber-300 hover:bg-amber-900/60'}">
+              <span>☕ ${d.day_label}</span>
+              <span class="text-[10px] opacity-75">راحة</span>
+            </button>
+          `;
+        } else {
+          const dayDone = d.videos.filter(v => completedSet.has(v.id)).length;
+          const isComplete = dayDone === d.videos.length && d.videos.length > 0;
+          let badgeClass = 'bg-slate-800 text-slate-300 hover:bg-slate-700';
+          if (isSelected) {
+            badgeClass = 'bg-cisco-600 text-white shadow ring-2 ring-cisco-400';
+          } else if (isComplete) {
+            badgeClass = 'bg-emerald-950/80 border border-emerald-600/50 text-emerald-400';
+          }
+
+          html += `
+            <button onclick="filterByDay(${d.calendar_day})" class="day-pill px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition flex items-center gap-1.5 ${badgeClass}">
+              <span class="font-num">${d.day_label}</span>
+              ${isComplete ? '<i class="fa-solid fa-check text-[10px]"></i>' : `<span class="text-[10px] opacity-75 font-num">${dayDone}/${d.videos.length}</span>`}
+            </button>
+          `;
+        }
+      });
+
+      container.innerHTML = html;
+    }
+
+    function filterBySection(secCode) {
+      if (selectedSectionFilter === secCode) {
+        selectedSectionFilter = null;
+      } else {
+        selectedSectionFilter = secCode;
+        selectedDayFilter = null;
+      }
+      renderSectionCards();
+      renderDayPills();
+      updateFilterAlert();
+      render();
+    }
+
+    function filterByDay(calDay) {
+      selectedDayFilter = calDay;
+      if (calDay !== null) selectedSectionFilter = null;
+      renderSectionCards();
+      renderDayPills();
+      updateFilterAlert();
+      render();
+      if (calDay) {
+        const el = document.getElementById(`cal-day-section-${calDay}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function setStatusFilter(status) {
+      currentFilter = status;
+      document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.classList.remove('bg-cisco-600', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+      const activeBtn = document.getElementById(`filter${status.charAt(0).toUpperCase() + status.slice(1)}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-cisco-600', 'text-white');
+        activeBtn.classList.remove('text-slate-400');
+      }
+      updateFilterAlert();
+      render();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (searchQuery) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      updateFilterAlert();
+      render();
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchQuery = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      updateFilterAlert();
+      render();
+    }
+
+    function resetFilters() {
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      currentFilter = 'all';
+      selectedDayFilter = null;
+      selectedSectionFilter = null;
+      setStatusFilter('all');
+      renderSectionCards();
+      renderDayPills();
+      updateFilterAlert();
+      render();
+    }
+
+    function updateFilterAlert() {
+      const alert = document.getElementById('activeFilterAlert');
+      const text = document.getElementById('activeFilterText');
+      const isFiltered = searchQuery !== '' || currentFilter !== 'all' || selectedDayFilter !== null || selectedSectionFilter !== null;
+      if (isFiltered) {
+        alert.classList.remove('hidden');
+        let parts = [];
+        if (searchQuery) parts.push(`بحث: "${searchQuery}"`);
+        if (currentFilter === 'pending') parts.push('الحالة: قيد الانتظار');
+        if (currentFilter === 'completed') parts.push('الحالة: المكتملة');
+        if (selectedSectionFilter) parts.push(`القسم: ${selectedSectionFilter}`);
+        if (selectedDayFilter) parts.push(`اليوم: Day ${selectedDayFilter}`);
+        text.textContent = 'تصفية نشطة: ' + parts.join(' • ');
+      } else {
+        alert.classList.add('hidden');
+      }
+    }
+
+    function toggleDayAccordion(calDayNum) {
+      if (collapsedDays.has(calDayNum)) {
+        collapsedDays.delete(calDayNum);
+      } else {
+        collapsedDays.add(calDayNum);
+      }
+      render();
+    }
+
+    function toggleAllAccordions(expand) {
+      if (expand) {
+        collapsedDays.clear();
+      } else {
+        CALENDAR_DATA.forEach(d => collapsedDays.add(d.calendar_day));
+      }
+      render();
+    }
+
+    function jumpToNextPending() {
+      const nextPending = ALL_VIDEOS.find(v => !completedSet.has(v.id));
+      if (!nextPending) {
+        alert('تهانينا! لقد أتممت جميع الدروس بنجاح.');
+        return;
+      }
+      if (currentFilter === 'completed') setStatusFilter('all');
+      if (selectedSectionFilter && selectedSectionFilter !== nextPending.section_code) {
+        selectedSectionFilter = null;
+      }
+      if (selectedDayFilter && selectedDayFilter !== nextPending.calendar_day) {
+        selectedDayFilter = null;
+      }
+      collapsedDays.delete(nextPending.calendar_day);
+      renderSectionCards();
+      renderDayPills();
+      render();
+
+      setTimeout(() => {
+        const row = document.getElementById(`video-row-${nextPending.id}`);
+        if (row) {
+          row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          row.classList.add('ring-4', 'ring-cisco-400', 'bg-cisco-900/40');
+          setTimeout(() => {
+            row.classList.remove('ring-4', 'ring-cisco-400', 'bg-cisco-900/40');
+          }, 2500);
+        }
+      }, 100);
+    }
+
+    function updateStats() {
+      const total = ALL_VIDEOS.length;
+      const completed = completedSet.size;
+      const pending = total - completed;
+      const pct = Math.round((completed / total) * 100);
+
+      let completedMins = 0;
+      ALL_VIDEOS.forEach(v => {
+        if (completedSet.has(v.id)) completedMins += v.durationMins;
+      });
+      const totalMins = 2011;
+      const remainingMins = totalMins - completedMins;
+
+      // Section completion check
+      let completedSecCount = 0;
+      SECTIONS_META.forEach(s => {
+        const secVids = ALL_VIDEOS.filter(v => v.section_code === s.code);
+        if (secVids.length > 0 && secVids.every(v => completedSet.has(v.id))) {
+          completedSecCount++;
+        }
+      });
+
+      document.getElementById('statPercent').textContent = `${pct}%`;
+      document.getElementById('statProgressBar').style.width = `${pct}%`;
+      document.getElementById('statCompletedCount').textContent = completed;
+      document.getElementById('statPendingCount').textContent = `المتبقي: ${pending} مقطع`;
+      
+      document.getElementById('statCompletedHours').textContent = (completedMins / 60).toFixed(1);
+      document.getElementById('statRemainingHours').textContent = `المتبقي: ~${(remainingMins / 60).toFixed(1)} ساعة`;
+
+      document.getElementById('statCompletedSections').textContent = completedSecCount;
+
+      document.getElementById('countAllTab').textContent = total;
+      document.getElementById('countPendingTab').textContent = pending;
+      document.getElementById('countCompletedTab').textContent = completed;
+
+      const badge = document.getElementById('badgeMotivational');
+      if (pct === 0) badge.textContent = 'ابدأ الآن 🚀';
+      else if (pct <= 25) badge.textContent = 'بداية قوية 💪';
+      else if (pct <= 50) badge.textContent = 'تقدم رائع 🎯';
+      else if (pct <= 75) badge.textContent = 'أكثر من النصف 🌟';
+      else if (pct < 100) badge.textContent = 'اللمسات الأخيرة 🏆';
+      else badge.textContent = 'تم الإنجاز بالكامل! 🎓';
+
+      const banner = document.getElementById('congratsBanner');
+      if (pct === 100) {
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      renderSectionCards();
+      renderDayPills();
+    }
+
+    function render() {
+      const container = document.getElementById('videosContainer');
+      const emptyState = document.getElementById('emptyState');
+
+      let visibleDays = CALENDAR_DATA.filter(d => {
+        if (selectedDayFilter && d.calendar_day !== selectedDayFilter) return false;
+        if (selectedSectionFilter && !d.is_rest_day && d.section_code !== selectedSectionFilter) return false;
+        if (selectedSectionFilter && d.is_rest_day) return false;
+
+        if (d.is_rest_day) {
+          if (currentFilter !== 'all') return false;
+          if (searchQuery && !d.title.toLowerCase().includes(searchQuery) && !d.day_label.toLowerCase().includes(searchQuery)) {
+            return false;
+          }
+          return true;
+        }
+
+        // For study days, check if any videos pass the status & search filters
+        const matchingVideos = d.videos.filter(v => {
+          const isDone = completedSet.has(v.id);
+          if (currentFilter === 'pending' && isDone) return false;
+          if (currentFilter === 'completed' && !isDone) return false;
+
+          if (searchQuery) {
+            const matchTitle = v.title.toLowerCase().includes(searchQuery);
+            const matchDay = d.day_label.toLowerCase().includes(searchQuery);
+            const matchSec = d.section_name.toLowerCase().includes(searchQuery);
+            if (!matchTitle && !matchDay && !matchSec) return false;
+          }
+          return true;
+        });
+
+        return matchingVideos.length > 0;
+      });
+
+      if (visibleDays.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      let html = '';
+
+      visibleDays.forEach(day => {
+        if (day.is_rest_day) {
+          html += `
+            <div id="cal-day-section-${day.calendar_day}" class="rounded-3xl bg-gradient-to-r from-amber-950/40 via-slate-900/90 to-purple-950/40 border border-amber-600/30 p-5 sm:p-6 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div class="flex items-center gap-4 text-center sm:text-right">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl shrink-0">
+                  <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 font-num">${day.day_label}</span>
+                    <span class="text-xs text-slate-400 font-num">${day.date}</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300">يوم راحة أسبوعي</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-bold text-white mt-1">${day.title}</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">خصص هذا اليوم للراحة التامة من الدروس الجديدة، أو مراجعة سريعة للملاحظات التي دونتها وتثبيت المفاهيم.</p>
+                </div>
+              </div>
+              <div class="px-4 py-2 rounded-xl bg-slate-800/80 border border-slate-700 text-xs font-semibold text-amber-300 shrink-0">
+                <span>استعد بقوة للأسبوع القادم 🚀</span>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        // Study Day Card
+        const dayVideos = day.videos;
+        const matchingVideos = dayVideos.filter(v => {
+          const isDone = completedSet.has(v.id);
+          if (currentFilter === 'pending' && isDone) return false;
+          if (currentFilter === 'completed' && !isDone) return false;
+          if (searchQuery) {
+            const matchTitle = v.title.toLowerCase().includes(searchQuery);
+            const matchDay = day.day_label.toLowerCase().includes(searchQuery);
+            const matchSec = day.section_name.toLowerCase().includes(searchQuery);
+            if (!matchTitle && !matchDay && !matchSec) return false;
+          }
+          return true;
+        });
+
+        const dayDoneCount = dayVideos.filter(v => completedSet.has(v.id)).length;
+        const dayTotalCount = dayVideos.length;
+        const dayPct = Math.round((dayDoneCount / dayTotalCount) * 100);
+        const isDayAllDone = dayDoneCount === dayTotalCount && dayTotalCount > 0;
+        const isCollapsed = collapsedDays.has(day.calendar_day) && !searchQuery;
+        const dayTotalMins = dayVideos.reduce((acc, curr) => acc + curr.durationMins, 0);
+
+        html += `
+          <div id="cal-day-section-${day.calendar_day}" class="rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl overflow-hidden transition">
+            
+            <div onclick="toggleDayAccordion(${day.calendar_day})" class="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 cursor-pointer hover:bg-slate-800/40 select-none border-b border-slate-800/60">
+              
+              <div class="flex items-center gap-3">
+                <button class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+                  <i class="fa-solid fa-chevron-${isCollapsed ? 'down' : 'up'} text-xs"></i>
+                </button>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h3 class="text-lg sm:text-xl font-black text-white font-num">${day.day_label}</h3>
+                    <span class="text-xs text-slate-400 font-num bg-slate-800 px-2.5 py-0.5 rounded-full border border-slate-700/60">${day.date}</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30 font-num">القسم ${day.section_code}</span>
+                    <span class="text-xs text-slate-400 font-num">(${day.sec_day_index}/${day.sec_total_days})</span>
+                    ${isDayAllDone ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">مكتمل بالكامل 🎉</span>' : ''}
+                  </div>
+                  <div class="text-xs text-slate-400 mt-1 flex items-center gap-2">
+                    <span class="font-semibold text-slate-300">${day.section_name}</span>
+                    <span>•</span>
+                    <span class="font-num">${dayTotalCount} مقاطع</span>
+                    <span>•</span>
+                    <span class="font-num">⏱️ ${dayTotalMins} دقيقة</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 self-stretch md:self-auto justify-between md:justify-end" onclick="event.stopPropagation()">
+                <div class="flex items-center gap-2">
+                  <div class="w-24 sm:w-32 h-2.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50">
+                    <div class="h-full bg-gradient-to-r from-cisco-500 to-emerald-400 transition-all duration-300" style="width: ${dayPct}%"></div>
+                  </div>
+                  <span class="text-xs font-semibold text-slate-300 font-num min-w-[50px]">${dayDoneCount}/${dayTotalCount} (${dayPct}%)</span>
+                </div>
+
+                <button 
+                  onclick="toggleDayAll(${day.calendar_day}, event)" 
+                  class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${isDayAllDone ? 'bg-emerald-600 text-white hover:bg-emerald-500' : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'}"
+                >
+                  <i class="fa-solid fa-${isDayAllDone ? 'check-double' : 'check'}"></i>
+                  <span>${isDayAllDone ? 'إلغاء تحديد اليوم' : 'تحديد اليوم كاملاً'}</span>
+                </button>
+              </div>
+
+            </div>
+
+            <div class="${isCollapsed ? 'hidden' : 'block'} divide-y divide-slate-800/50">
+        `;
+
+        matchingVideos.forEach(video => {
+          const isDone = completedSet.has(video.id);
+          const hasNote = notesMap[video.id] && notesMap[video.id].trim().length > 0;
+
+          html += `
+            <div 
+              id="video-row-${video.id}" 
+              class="p-4 sm:px-5 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 video-card-transition ${isDone ? 'bg-slate-950/40 text-slate-400' : 'hover:bg-slate-800/30'}"
+            >
+              
+              <div class="flex items-start sm:items-center gap-3.5 flex-1 min-w-0">
+                <button 
+                  type="button"
+                  onclick="toggleVideo(${video.id}, event)"
+                  title="${isDone ? 'اضغط لتغيير الحالة إلى قيد الانتظار' : 'اضغط لتحديد الدرس كمكتمل'}"
+                  class="w-7 h-7 mt-0.5 sm:mt-0 rounded-lg flex items-center justify-center shrink-0 border-2 transition active:scale-90 ${isDone ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'bg-slate-950 border-slate-700 hover:border-cisco-400 text-transparent'}"
+                >
+                  <i class="fa-solid fa-check text-xs font-black"></i>
+                </button>
+
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 font-num shrink-0">#${video.id}</span>
+
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm font-semibold text-slate-100 flex items-center flex-wrap gap-1.5 ${isDone ? 'line-through text-slate-500' : ''}">
+                    <span>${escapeHtml(video.title)}</span>
+                  </div>
+                  
+                  <div class="flex items-center gap-3 text-xs text-slate-400 mt-1">
+                    <span class="flex items-center gap-1 font-num text-slate-400">
+                      <i class="fa-regular fa-clock text-[11px] text-cisco-400"></i>
+                      <span>${video.duration}</span>
+                    </span>
+                    
+                    ${isDone ? `
+                      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-num">
+                        [✓] Completed • مكتمل
+                      </span>
+                    ` : `
+                      <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-400/90 border border-amber-500/20 font-num">
+                        [ ] Pending • قيد الانتظار
+                      </span>
+                    `}
+
+                    ${hasNote ? `
+                      <span class="text-xs text-cisco-400 flex items-center gap-1" title="يوجد ملاحظة مسجلة">
+                        <i class="fa-solid fa-note-sticky text-yellow-400"></i>
+                        <span>ملاحظة</span>
+                      </span>
+                    ` : ''}
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                <button 
+                  onclick="openVideoModal(${video.id})"
+                  title="مشاهدة الفيديو داخل الصفحة"
+                  class="px-3.5 py-1.5 rounded-xl bg-cisco-600/20 hover:bg-cisco-600 text-cisco-300 hover:text-white border border-cisco-500/30 text-xs font-bold flex items-center gap-1.5 transition active:scale-95"
+                >
+                  <i class="fa-solid fa-play text-[11px]"></i>
+                  <span>مشاهدة</span>
+                </button>
+
+                <a 
+                  href="${video.url}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  title="فتح في يوتيوب"
+                  class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-red-400 text-xs transition active:scale-95"
+                >
+                  <i class="fa-brands fa-youtube text-sm"></i>
+                </a>
+
+                <button 
+                  onclick="openNotesModal(${video.id})"
+                  title="ملاحظات الدرس"
+                  class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-400 text-xs transition active:scale-95"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </div>
+
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function openVideoModal(id) {
+      activeModalVideoId = id;
+      const video = ALL_VIDEOS.find(v => v.id === id);
+      if (!video) return;
+
+      document.getElementById('modalVideoTitle').textContent = video.title;
+      document.getElementById('modalVideoMeta').textContent = `${video.day_label} (${video.section_name}) • ${video.date} • المدة: ${video.duration}`;
+      document.getElementById('modalExternalLink').href = video.url;
+
+      updateModalToggleBtn();
+
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${video.ytId}?autoplay=1&rel=0`;
+
+      document.getElementById('videoModal').classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = '';
+      document.getElementById('videoModal').classList.add('hidden');
+      activeModalVideoId = null;
+    }
+
+    function updateModalToggleBtn() {
+      const btn = document.getElementById('modalToggleCompleteBtn');
+      if (!activeModalVideoId) return;
+      const isDone = completedSet.has(activeModalVideoId);
+
+      if (isDone) {
+        btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-emerald-600 text-white hover:bg-emerald-500';
+        btn.innerHTML = '<i class="fa-solid fa-check-double"></i><span>مكتمل ✓ (اضغط للإلغاء)</span>';
+      } else {
+        btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-slate-800 text-slate-200 hover:bg-emerald-600 hover:text-white border border-slate-700';
+        btn.innerHTML = '<i class="fa-solid fa-check"></i><span>تحديد كمكتمل الآن</span>';
+      }
+    }
+
+    function toggleCurrentModalVideo() {
+      if (!activeModalVideoId) return;
+      toggleVideo(activeModalVideoId);
+      updateModalToggleBtn();
+    }
+
+    function navigateModalVideo(direction) {
+      if (!activeModalVideoId) return;
+      const nextId = activeModalVideoId + direction;
+      if (nextId >= 1 && nextId <= ALL_VIDEOS.length) {
+        openVideoModal(nextId);
+      }
+    }
+
+    let activeNotesVideoId = null;
+    function openNotesModal(id) {
+      activeNotesVideoId = id;
+      const video = ALL_VIDEOS.find(v => v.id === id);
+      document.getElementById('notesVideoTitle').textContent = `#${video.id} - ${video.title}`;
+      document.getElementById('noteTextArea').value = notesMap[id] || '';
+      document.getElementById('notesModal').classList.remove('hidden');
+    }
+
+    function closeNotesModal() {
+      document.getElementById('notesModal').classList.add('hidden');
+      activeNotesVideoId = null;
+    }
+
+    function saveNote() {
+      if (!activeNotesVideoId) return;
+      const text = document.getElementById('noteTextArea').value.trim();
+      if (text) {
+        notesMap[activeNotesVideoId] = text;
+      } else {
+        delete notesMap[activeNotesVideoId];
+      }
+      saveState();
+      closeNotesModal();
+      render();
+    }
+
+    function exportUpdatedCSV() {
+      let csvContent = '"Calendar Day","Date","Section","Video Title","Video URL","Duration","Status"\n';
+      
+      CALENDAR_DATA.forEach(d => {
+        if (d.is_rest_day) {
+          csvContent += `"${d.day_label}","${d.date}","يوم راحة أسبوعي","${d.title}","-","-","[✓] Rest Day"\n`;
+        } else {
+          d.videos.forEach(v => {
+            const isDone = completedSet.has(v.id);
+            const statusStr = isDone ? '[x] Completed' : '[ ] Pending';
+            const escapedTitle = v.title.replace(/"/g, '""');
+            csvContent += `"${d.day_label}","${d.date}","${d.section_name}","${escapedTitle}","${v.url}","${v.duration}","${statusStr}"\n`;
+          });
+        }
+      });
+
+      const blob = new Blob(["\ufeff" + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'Plan_2026_Cisco_CCNA_30Days_6Sections_Updated.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function openBackupModal() {
+      document.getElementById('backupModal').classList.remove('hidden');
+    }
+
+    function closeBackupModal() {
+      document.getElementById('backupModal').classList.add('hidden');
+    }
+
+    function downloadBackupJSON() {
+      const backupData = {
+        timestamp: new Date().toISOString(),
+        plan: "30_days_6_sections",
+        completedIds: Array.from(completedSet),
+        notes: notesMap
+      };
+
+      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `CCNA_30Days_Progress_Backup_${new Date().toISOString().slice(0, 10)}.json`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function handleRestoreFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data && Array.isArray(data.completedIds)) {
+            completedSet = new Set(data.completedIds);
+            if (data.notes) notesMap = data.notes;
+            saveState();
+            updateStats();
+            render();
+            closeBackupModal();
+            alert('تم استعادة التقدم بنجاح!');
+          } else {
+            alert('صيغة الملف غير صالحة.');
+          }
+        } catch (err) {
+          alert('حدث خطأ أثناء قراءة ملف النسخة الاحتياطية.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function confirmReset() {
+      if (confirm('هل أنت متأكد من رغبتك في تصفير كافة مقاطع الخطة وإعادتها إلى قيد الانتظار؟')) {
+        completedSet.clear();
+        saveState();
+        updateStats();
+        render();
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem(STORAGE_KEY_THEME, 'light');
+        document.getElementById('themeIcon').className = 'fa-solid fa-moon';
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem(STORAGE_KEY_THEME, 'dark');
+        document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+      }
+    }
+
+    function applyTheme() {
+      const savedTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'dark';
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('themeIcon').className = 'fa-solid fa-moon';
+      } else {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+      }
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+        closeNotesModal();
+        closeBackupModal();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+        document.getElementById('searchInput').focus();
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
